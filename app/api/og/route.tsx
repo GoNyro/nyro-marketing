@@ -20,11 +20,11 @@ const assets = Promise.all([
   ),
 ]);
 
-const INK = "#2c332b";
-const MUTED = "#5c6357";
-const FAINT = "#8b9184";
-const STONE = "#f6f4ec";
-const OLIVE = "#5d7040";
+const INK = "#20241f";
+const STONE = "#f4f3ec";
+const MUTED = "rgba(244,243,236,0.62)";
+const FAINT = "rgba(244,243,236,0.42)";
+const OLIVE = "#6f8747";
 
 const PRODUCTS = ["Customer Portal", "Fabrication Platform", "Retailer Platform"];
 
@@ -52,8 +52,8 @@ export async function GET(request: Request) {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "68px 80px",
-          background: STONE,
-          color: INK,
+          background: INK,
+          color: STONE,
           fontFamily: "Instrument Sans",
         }}
       >
@@ -67,7 +67,7 @@ export async function GET(request: Request) {
             height: 640,
             borderRadius: 9999,
             background:
-              "radial-gradient(circle, rgba(93,112,64,0.22), rgba(93,112,64,0))",
+              "radial-gradient(circle, rgba(111,135,71,0.28), rgba(111,135,71,0))",
             display: "flex",
           }}
         />
@@ -81,7 +81,7 @@ export async function GET(request: Request) {
             />
             <path
               d="M4 1.75 v2.5 M15 1.75 v2.5 M4 3 h11"
-              stroke={FAINT}
+              stroke="rgba(244,243,236,0.4)"
               strokeWidth="1"
               strokeLinecap="round"
             />

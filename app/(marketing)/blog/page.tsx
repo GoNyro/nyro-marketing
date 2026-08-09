@@ -3,7 +3,7 @@ import { Container } from "@/components/marketing/Container";
 import { Eyebrow } from "@/components/marketing/primitives/Eyebrow";
 import { Reveal } from "@/components/marketing/primitives/Reveal";
 import { Section } from "@/components/marketing/primitives/Section";
-import { CtaBand } from "@/components/marketing/sections/CtaBand";
+import { SlimCta } from "@/components/marketing/sections/SlimCta";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
@@ -37,7 +37,7 @@ export default function BlogIndexPage() {
       />
 
       {/* Hero - sits under the sticky nav, so it gets generous top padding. */}
-      <section className="surface-cream pb-12 pt-28 sm:pt-32 md:pb-16 lg:pt-36">
+      <section className="surface-cream pb-12 pt-16 md:pb-16 md:pt-24">
         <Container>
           <Eyebrow>Resources</Eyebrow>
           <h1 className="mt-5 display-hero max-w-3xl text-balance">
@@ -100,7 +100,7 @@ export default function BlogIndexPage() {
         )}
       </Section>
 
-      <CtaBand />
+      <SlimCta />
     </>
   );
 }

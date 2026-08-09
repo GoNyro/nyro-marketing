@@ -36,17 +36,7 @@ export default function ContactPage() {
 
       {/* Hero */}
       <section className="surface-cream relative overflow-hidden">
-        <div aria-hidden className="absolute inset-0 -z-10">
-          <div
-            className="absolute left-1/2 top-[-18%] h-[420px] w-[min(720px,90vw)] -translate-x-1/2 rounded-full"
-            style={{
-              background:
-                "radial-gradient(closest-side, oklch(0.58 0.1 132 / 0.16), transparent)",
-            }}
-          />
-        </div>
-
-        <Container className="relative pb-12 pt-28 sm:pt-32 md:pb-16 lg:pt-36">
+        <Container className="relative pb-12 pt-16 md:pb-16 md:pt-24">
           <Eyebrow>Contact</Eyebrow>
           <h1 className="display-hero mt-5 max-w-3xl text-balance">
             Book a demo - and draw a benchtop that prices itself.
@@ -60,12 +50,7 @@ export default function ContactPage() {
             through what rollout looks like - no prep required.
           </p>
           <div className="mt-8">
-            <BookCta
-              label="Email us to book"
-              href={emailHref}
-              nudge
-              withArrow
-            />
+            <BookCta label="Email us to book" href={emailHref} withArrow />
           </div>
         </Container>
       </section>

@@ -1,12 +1,12 @@
-import { Check, Minus, Eye } from "lucide-react";
+import { Check, Eye, Minus } from "lucide-react";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema, faqPageSchema } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
+import { Container } from "@/components/marketing/Container";
 import { Section } from "@/components/marketing/primitives/Section";
-import { SectionHeading } from "@/components/marketing/primitives/SectionHeading";
 import { BookCta } from "@/components/marketing/primitives/BookCta";
 import { Reveal } from "@/components/marketing/primitives/Reveal";
-import { CtaBand } from "@/components/marketing/sections/CtaBand";
+import { SlimCta } from "@/components/marketing/sections/SlimCta";
 import {
   Faq,
   faqItemsToSchema,
@@ -105,7 +105,7 @@ function VisibilityCell({ value, note }: { value: Visibility; note?: string }) {
       {value === "yes" ? (
         <Check className="size-4 text-accent" aria-label="Visible" />
       ) : value === "partial" ? (
-        <Eye className="size-4 text-clay-ink" aria-label="Partially visible" />
+        <Eye className="size-4 text-status-warm-ink" aria-label="Partially visible" />
       ) : (
         <Minus className="size-4 text-muted-foreground/50" aria-label="Not visible" />
       )}
@@ -125,130 +125,144 @@ export default function RetailerPage() {
       />
       <JsonLd data={faqPageSchema(faqItemsToSchema(FAQS))} />
 
-      {/* Hero */}
-      <Section className="border-t-0">
-        <div className="flex max-w-3xl flex-col items-start gap-6">
-          <SectionHeading
-            as="h1"
-            eyebrow="Retailer Platform · For retailers"
-            title="Quote the kitchen while the customer is still in the store."
-            titleClassName="display-hero"
-          />
-          <p data-speakable className="text-lg leading-relaxed text-muted-foreground">
+      {/* Dark hero with the routing flow */}
+      <section className="surface-dark ink-grid relative overflow-hidden">
+        <Container className="relative pb-16 pt-16 md:pb-20 md:pt-20">
+          <p className="label-mono text-[0.7rem] text-surface-dark-foreground/50">
+            Retailer Platform · for retailers
+          </p>
+          <h1 className="display-hero mt-5 max-w-2xl text-balance text-surface-dark-foreground">
+            Quote the kitchen while the customer is still in the store
+          </h1>
+          <p
+            data-speakable
+            className="mt-5 max-w-xl text-base leading-relaxed text-surface-dark-foreground/65"
+          >
             For chains and merchants selling benchtops: one quoting surface
             across every partner fabricator. Staff quote a homeowner on the
             spot, your margin and branding go on top, and the approved job
             routes to the right fabricator to make.
           </p>
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-            <BookCta label="Talk to us" nudge withArrow />
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <BookCta variant="inverse" label="Talk to us" />
             <BookCta
-              variant="secondary"
+              variant="ghost-dark"
               label="How fabricators fit in"
               href="/customer"
             />
           </div>
-        </div>
-      </Section>
 
-      {/* Routing flow */}
-      <Section surface="card">
-        <SectionHeading
-          eyebrow="How routing works"
-          title="Live catalogs in, one order out."
-          sub="The retailer never holds fabricator data. Every quote reads catalog and pricing live from the fabricator's tenant, scoped by the relationship they control."
-        />
-        <ol className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          {FLOW.map((item, i) => (
-            <Reveal key={item.step} as="li" delay={i * 0.06}>
-              <div className="border-t border-foreground/20 pt-5">
-                <span className="label-mono text-muted-foreground">{item.step}</span>
-              </div>
-              <h3 className="mt-3 font-display text-xl text-foreground">
-                {item.title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                {item.blurb}
-              </p>
-            </Reveal>
-          ))}
-        </ol>
-      </Section>
+          {/* routing flow rail */}
+          <div className="mt-16">
+            <ol className="grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
+              {FLOW.map((item) => (
+                <li
+                  key={item.step}
+                  className="border-t border-surface-dark-foreground/25 pt-4"
+                >
+                  <span className="label-mono text-[0.65rem] text-surface-dark-foreground/45">
+                    {item.step}
+                  </span>
+                  <h3 className="mt-2 text-sm font-medium text-surface-dark-foreground">
+                    {item.title}
+                  </h3>
+                  <p className="mt-1.5 text-[13px] leading-relaxed text-surface-dark-foreground/55">
+                    {item.blurb}
+                  </p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </Container>
+      </section>
 
       {/* Who sees what */}
-      <Section>
-        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-5">
-            <SectionHeading
-              eyebrow="Trust boundaries"
-              title="Both sides see exactly what they should."
-              sub="Commercial terms stay commercial. The platform enforces who sees which number, so partnerships don't depend on politeness."
-            />
-          </div>
-          <Reveal className="lg:col-span-7">
-            <div className="overflow-x-auto rounded-xl border border-border bg-card">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="min-w-56">What</TableHead>
-                    <TableHead>Retailer sees</TableHead>
-                    <TableHead>Fabricator sees</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {VISIBILITY_ROWS.map((row) => (
-                    <TableRow key={row.item}>
-                      <TableCell className="whitespace-normal font-medium text-foreground/90">
-                        {row.item}
-                      </TableCell>
-                      <TableCell>
-                        <VisibilityCell
-                          value={row.retailer}
-                          note={row.retailer === "partial" ? row.note : undefined}
-                        />
-                      </TableCell>
-                      <TableCell>
-                        <VisibilityCell
-                          value={row.fabricator}
-                          note={row.fabricator === "partial" ? row.note : undefined}
-                        />
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+      <section className="surface-gray border-t border-border">
+        <Container className="py-20 md:py-28">
+          <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-5">
+              <h2 className="display-md text-balance">
+                Both sides see exactly what they should.
+              </h2>
+              <p className="mt-5 max-w-md text-base leading-relaxed text-muted-foreground">
+                Commercial terms stay commercial. The platform enforces who
+                sees which number, so partnerships don&apos;t depend on
+                politeness.
+              </p>
             </div>
-          </Reveal>
-        </div>
-      </Section>
+            <Reveal className="lg:col-span-7">
+              <div className="overflow-x-auto rounded-xl bg-card shadow-[0_16px_48px_-24px_rgba(0,0,0,0.25)] ring-1 ring-black/5">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="min-w-56">What</TableHead>
+                      <TableHead>Retailer sees</TableHead>
+                      <TableHead>Fabricator sees</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {VISIBILITY_ROWS.map((row) => (
+                      <TableRow key={row.item}>
+                        <TableCell className="whitespace-normal font-medium text-foreground/90">
+                          {row.item}
+                        </TableCell>
+                        <TableCell>
+                          <VisibilityCell
+                            value={row.retailer}
+                            note={row.retailer === "partial" ? row.note : undefined}
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <VisibilityCell
+                            value={row.fabricator}
+                            note={row.fabricator === "partial" ? row.note : undefined}
+                          />
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            </Reveal>
+          </div>
+        </Container>
+      </section>
+
+      <SlimCta
+        title="Bring benchtops into the store visit."
+        sub="The Retailer Platform rolls out with our fabricator network - talk to us about the regions you need covered."
+        label="Register interest"
+      />
 
       {/* Analytics for category buyers */}
-      <Section surface="card">
-        <div className="mx-auto max-w-2xl text-center">
-          <SectionHeading
-            align="center"
-            eyebrow="For category buyers"
-            title="See the market you're selling into."
-            sub="Demand by region, material and style, quote-to-order conversion by store and by fabricator - the analytics to manage fabricator relationships and negotiate tiers on evidence instead of anecdote."
-          />
-        </div>
-      </Section>
+      <section className="surface-gray border-t border-border">
+        <Container className="py-20 md:py-24">
+          <div className="mx-auto max-w-xl text-center">
+            <h2 className="display-md text-balance">
+              See the market you&apos;re selling into.
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+              Demand by region, material and style, quote-to-order conversion
+              by store and by fabricator - the analytics to manage fabricator
+              relationships and negotiate tiers on evidence instead of
+              anecdote.
+            </p>
+          </div>
+        </Container>
+      </section>
 
       {/* FAQ */}
-      <Section>
-        <Faq items={FAQS} sub="What retail teams ask about quoting across a fabricator network." />
+      <Section surface="card">
+        <Faq
+          items={FAQS}
+          sub="What retail teams ask about quoting across a fabricator network."
+        />
       </Section>
 
-      <CtaBand
-        eyebrow="Partner with us"
-        title={
-          <>
-            Bring benchtops into
-            <br className="hidden sm:block" /> the store visit.
-          </>
-        }
-        sub="The Retailer Platform rolls out with our fabricator network. Talk to us about the regions you need covered and we'll map the partners to get you quoting."
-        secondary={{ label: "See the fabricator side", href: "/fabricator" }}
+      <SlimCta
+        title="Map the partners to get you quoting."
+        sub="Tell us the regions and fabricators you need covered."
+        label="Talk to us"
       />
     </>
   );

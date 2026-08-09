@@ -1,26 +1,24 @@
 import {
-  BookOpen,
-  DraftingCompass,
   BadgeDollarSign,
+  BookOpen,
   FileCheck2,
-  Bell,
   FileCode2,
-  type LucideIcon,
 } from "lucide-react";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema, faqPageSchema } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
+import { Container } from "@/components/marketing/Container";
 import { Section } from "@/components/marketing/primitives/Section";
-import { SectionHeading } from "@/components/marketing/primitives/SectionHeading";
 import { BookCta } from "@/components/marketing/primitives/BookCta";
-import { Reveal } from "@/components/marketing/primitives/Reveal";
-import { CtaBand } from "@/components/marketing/sections/CtaBand";
+import { AppWindow } from "@/components/marketing/mockups/AppWindow";
+import { CanvasScreen } from "@/components/marketing/mockups/CanvasScreen";
+import { FeatureRows, type FeatureRow } from "@/components/marketing/sections/FeatureRows";
+import { SlimCta } from "@/components/marketing/sections/SlimCta";
 import {
   Faq,
   faqItemsToSchema,
   type FaqItem,
 } from "@/components/marketing/sections/Faq";
-import { QuoteSheet } from "@/components/marketing/visuals/QuoteSheet";
 
 export const metadata = buildMetadata({
   title: "Customer Portal - self-serve quoting for your trade customers",
@@ -29,42 +27,38 @@ export const metadata = buildMetadata({
   path: "/customer",
 });
 
-const FEATURES: { icon: LucideIcon; title: string; blurb: string }[] = [
+const ROWS: FeatureRow[] = [
   {
     icon: BookOpen,
-    title: "Your catalog, scoped per customer",
-    blurb:
-      "Share the full range or a hand-picked subset with each account. Materials, thicknesses, edge profiles, cutouts - customers only ever see what you've chosen to show them.",
-  },
-  {
-    icon: DraftingCompass,
-    title: "The quote canvas",
-    blurb:
-      "A drawing surface built for benchtops: L-shapes and U-shapes, mitres, waterfalls, splashbacks, sink and hob cutouts. The geometry is captured once, correctly, by the person who knows the job.",
+    title: "Your catalog,\nscoped per customer",
+    lead: "Every account sees exactly what you choose - nothing more.",
+    body: [
+      "Share the full range or a hand-picked subset with each customer: materials, thicknesses, edge profiles, cutouts. Pricing tiers sit beside access, so the same slab can carry a different number for every account.",
+    ],
   },
   {
     icon: BadgeDollarSign,
-    title: "Live pricing at their tier",
-    blurb:
-      "Every account has a pricing tier you control. As the customer draws, the price updates against your rules - materials, machining, edgework, delivery - so quoting stops being a queue.",
+    title: "Live pricing\nfrom your rules",
+    lead: "The price they see is the price you set, recalculated on every edit.",
+    body: [
+      "Materials, machining, edgework, cutouts, delivery zones - your pricing engine runs on each change to the drawing. Quoting stops being a queue behind one estimator; the weird 10% of jobs is all your team touches.",
+    ],
   },
   {
     icon: FileCheck2,
-    title: "Approvals that keep you in charge",
-    blurb:
-      "Quotes land with you for review before they become orders. Homeowner approvals run through branded magic links - no login, no friction, a clear paper trail.",
+    title: "Approvals that\nkeep you in charge",
+    lead: "Quotes land with you for review before they become orders.",
+    body: [
+      "Homeowner approvals run over branded magic links - no login, no friction, a clear paper trail. Customers watch status change - quoted, approved, in production, ready - without ringing the front desk.",
+    ],
   },
   {
     icon: FileCode2,
-    title: "DXF and CNC-ready export",
-    blurb:
-      "Approved jobs export as DXF and CNC-ready files with the geometry attached, straight into the production system you already run. No re-drawing, no transcription errors.",
-  },
-  {
-    icon: Bell,
-    title: "Notifications that close the loop",
-    blurb:
-      "Customers see where their job is - quoted, approved, in production, ready - without ringing your front desk. Your team sees what needs action today.",
+    title: "DXF & CNC-ready\nexport",
+    lead: "Approved geometry lands in your production system untouched.",
+    body: [
+      "The shape the customer drew exports as DXF and CNC-ready files - no re-drawing, no transcription errors. Production, stock and financials stay wherever you run them today; the portal fixes the front of the funnel.",
+    ],
   },
 ];
 
@@ -98,108 +92,59 @@ export default function CustomerPortalPage() {
       />
       <JsonLd data={faqPageSchema(faqItemsToSchema(FAQS))} />
 
-      {/* Hero */}
-      <Section className="border-t-0">
-        <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-10">
-          <div className="flex max-w-xl flex-col items-start gap-6">
-            <SectionHeading
-              as="h1"
-              eyebrow="Customer Portal · For fabricators"
-              title="Let your trade customers quote themselves."
-              titleClassName="display-hero"
+      {/* Dark hero with the canvas screen */}
+      <section className="surface-dark ink-grid relative overflow-hidden">
+        <Container className="relative pb-14 pt-16 md:pb-20 md:pt-20">
+          <p className="label-mono text-[0.7rem] text-surface-dark-foreground/50">
+            Customer Portal · for fabricators
+          </p>
+          <h1 className="display-hero mt-5 max-w-2xl text-balance text-surface-dark-foreground">
+            Let your trade customers quote themselves
+          </h1>
+          <p
+            data-speakable
+            className="mt-5 max-w-xl text-base leading-relaxed text-surface-dark-foreground/65"
+          >
+            The kitchen companies, joiners and builders who buy from you
+            already know the job. Give them a portal where they draw it against
+            your catalog, see your price for their account, and send it in -
+            while your team reviews instead of transcribes.
+          </p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <BookCta variant="inverse" />
+            <BookCta
+              variant="ghost-dark"
+              label="What's included"
+              href="#included"
             />
-            <p data-speakable className="text-lg leading-relaxed text-muted-foreground">
-              The kitchen companies, joiners and builders who buy from you
-              already know the job. Give them a portal where they draw it
-              against your catalog, see your price for their account, and send
-              it in - while your team reviews instead of transcribes.
-            </p>
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <BookCta nudge withArrow />
-              <BookCta
-                variant="secondary"
-                label="See how pricing works"
-                href="#pricing-control"
-              />
-            </div>
           </div>
-          <Reveal y={24}>
-            <div className="blueprint-grid relative rounded-2xl border border-border bg-secondary/60 p-6 sm:p-10">
-              <QuoteSheet />
-            </div>
-          </Reveal>
-        </div>
-      </Section>
 
-      {/* Features */}
-      <Section surface="card" id="pricing-control">
-        <SectionHeading
-          eyebrow="What's included"
-          title="Everything between the enquiry and the saw."
-          sub="The portal covers quoting end to end - and hands production to the systems you already trust."
-        />
-        <div className="mt-14 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-          {FEATURES.map((feature, i) => (
-            <Reveal key={feature.title} delay={(i % 3) * 0.06}>
-              <feature.icon className="size-6 text-accent" strokeWidth={1.75} />
-              <h3 className="mt-4 text-lg font-semibold text-foreground">
-                {feature.title}
-              </h3>
-              <p className="mt-2 text-base leading-relaxed text-muted-foreground">
-                {feature.blurb}
-              </p>
-            </Reveal>
-          ))}
-        </div>
-      </Section>
-
-      {/* Honest scope: what stays yours */}
-      <Section>
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-          <SectionHeading
-            eyebrow="Deliberately scoped"
-            title="Production stays wherever you want it."
-            sub="The Customer Portal doesn't ask you to change how you make things. It fixes the front of the funnel and exports clean geometry to the back."
-          />
-          <div className="grid gap-4 sm:grid-cols-2">
-            <Reveal className="rounded-xl border border-border bg-card p-6">
-              <p className="label-mono text-[0.65rem] text-ink-customer">
-                On Engage
-              </p>
-              <ul className="mt-4 space-y-2 text-sm leading-relaxed text-foreground/80">
-                <li>Catalog & customer access</li>
-                <li>Quote canvas & live pricing</li>
-                <li>Approvals & magic links</li>
-                <li>Order intake & tracking</li>
-                <li>DXF / CNC file export</li>
-                <li>Notifications</li>
-              </ul>
-            </Reveal>
-            <Reveal delay={0.08} className="rounded-xl border border-dashed border-border bg-transparent p-6">
-              <p className="label-mono text-[0.65rem] text-muted-foreground">
-                In your existing systems
-              </p>
-              <ul className="mt-4 space-y-2 text-sm leading-relaxed text-muted-foreground">
-                <li>Production & scheduling</li>
-                <li>CAM & nesting</li>
-                <li>Stock & materials</li>
-                <li>Dispatch & delivery runs</li>
-                <li>Financials</li>
-              </ul>
-              <p className="mt-4 text-xs text-muted-foreground">
-                Want these on Engage too? That&apos;s the{" "}
-                <a
-                  href="/fabricator"
-                  className="font-medium text-accent underline decoration-accent/40 underline-offset-4"
-                >
-                  Fabrication Platform
-                </a>{" "}
-                - and upgrading is a module switch, not a migration.
-              </p>
-            </Reveal>
+          <div className="mt-14">
+            <AppWindow>
+              <CanvasScreen />
+            </AppWindow>
           </div>
-        </div>
-      </Section>
+        </Container>
+      </section>
+
+      {/* What's included - editorial rows */}
+      <section id="included" className="surface-gray scroll-mt-16 border-t border-border">
+        <Container className="py-20 md:py-28">
+          <h2 className="display-md max-w-2xl text-balance">
+            Everything between the enquiry and the saw.
+          </h2>
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">
+            The portal covers quoting end to end - and hands production to the
+            systems you already trust.
+          </p>
+          <FeatureRows rows={ROWS} className="mt-16" />
+        </Container>
+      </section>
+
+      <SlimCta
+        title="Start with two accounts."
+        sub="Roll the portal out to the trade customers who fill your quoting inbox first."
+      />
 
       {/* FAQ */}
       <Section surface="card">
@@ -209,15 +154,9 @@ export default function CustomerPortalPage() {
         />
       </Section>
 
-      <CtaBand
-        title={
-          <>
-            Your best customers already
-            <br className="hidden sm:block" /> know what they need.
-          </>
-        }
-        sub="Book a demo and we'll load a sample catalog with your materials, then walk through the portal exactly as your biggest trade account would see it."
-        secondary={{ label: "Compare the three products", href: "/#platform" }}
+      <SlimCta
+        title="See it on your materials."
+        sub="We'll load a sample catalog and walk the portal exactly as your biggest account would see it."
       />
     </>
   );

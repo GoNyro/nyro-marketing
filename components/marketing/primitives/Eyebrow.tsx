@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-/** Geist Mono uppercase label - the "engineered / measured" signal. */
+/** Small mono kicker above a heading. Muted by default; quiet by design. */
 export function Eyebrow({
   children,
   className,
@@ -9,8 +9,8 @@ export function Eyebrow({
   className?: string;
 }) {
   return (
-    <p className={cn("label-mono text-accent", className)}>
-      <span aria-hidden className="opacity-60">/</span> {children}
+    <p className={cn("label-mono text-[0.7rem] text-muted-foreground", className)}>
+      {children}
     </p>
   );
 }

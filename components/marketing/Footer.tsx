@@ -2,24 +2,13 @@ import Link from "next/link";
 import { siteConfig } from "@/lib/site";
 import { Container } from "@/components/marketing/Container";
 import { Lockup } from "@/components/marketing/Logo";
-import { BookCta } from "@/components/marketing/primitives/BookCta";
 
 const currentYear = new Date().getFullYear();
 
 export function Footer() {
   return (
-    <footer className="surface-dark relative overflow-hidden">
-      <div
-        aria-hidden
-        className="blueprint-grid-dark pointer-events-none absolute inset-0"
-        style={{
-          maskImage:
-            "radial-gradient(ellipse 100% 90% at 50% 100%, black 30%, transparent 90%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse 100% 90% at 50% 100%, black 30%, transparent 90%)",
-        }}
-      />
-      <Container className="relative py-20">
+    <footer className="surface-dark relative overflow-hidden border-t border-surface-dark-foreground/10">
+      <Container className="relative py-16 md:py-20">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <Link
@@ -29,20 +18,17 @@ export function Footer() {
             >
               <Lockup tone="cream" />
             </Link>
-            <p className="mt-6 max-w-sm text-base text-surface-dark-foreground/70">
+            <p className="mt-6 max-w-sm text-sm leading-relaxed text-surface-dark-foreground/60">
               The quoting and order platform for benchtop fabricators. Your
               customers draw the job, Engage prices it live, and the order
-              flows through to your factory floor.
+              flows through to the factory floor.
             </p>
-            <div className="mt-8">
-              <BookCta variant="inverse" />
-            </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-10 sm:grid-cols-2 lg:col-span-7 lg:justify-items-end">
+          <div className="grid grid-cols-2 gap-10 lg:col-span-7 lg:justify-items-end">
             {siteConfig.footerNav.map((group) => (
               <div key={group.heading}>
-                <h3 className="label-mono text-surface-dark-foreground/50">
+                <h3 className="label-mono text-[0.65rem] text-surface-dark-foreground/40">
                   {group.heading}
                 </h3>
                 <ul className="mt-5 space-y-3">
@@ -50,7 +36,7 @@ export function Footer() {
                     <li key={link.href}>
                       <Link
                         href={link.href}
-                        className="text-sm text-surface-dark-foreground/80 transition-colors hover:text-surface-dark-foreground"
+                        className="text-sm text-surface-dark-foreground/75 transition-colors hover:text-surface-dark-foreground"
                       >
                         {link.label}
                       </Link>
@@ -62,7 +48,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col gap-4 border-t border-surface-dark-foreground/15 pt-8 text-xs text-surface-dark-foreground/55 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-14 flex flex-col gap-4 border-t border-surface-dark-foreground/10 pt-7 text-xs text-surface-dark-foreground/45 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {currentYear} {siteConfig.legal.entity}. Engage is a{" "}
             <a

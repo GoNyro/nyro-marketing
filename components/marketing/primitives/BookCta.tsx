@@ -4,47 +4,41 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
 type BookCtaProps = {
-  variant?: "primary" | "inverse" | "secondary" | "ink" | "sage" | "clay";
+  /** Monochrome system: ink pill on light surfaces, white pill on dark,
+      quiet bordered ghost for secondary actions. */
+  variant?: "primary" | "inverse" | "secondary" | "ghost-dark";
   label?: string;
   href?: string;
   className?: string;
-  nudge?: boolean;
   withArrow?: boolean;
   size?: "default" | "lg";
 };
 
 const variantClass = {
-  primary: "bg-primary text-primary-foreground hover:bg-primary/90",
+  primary: "bg-primary text-primary-foreground hover:bg-primary/85",
   inverse: "bg-background text-foreground hover:bg-background/90",
   secondary:
     "border border-border bg-transparent text-foreground hover:bg-secondary",
-  // Quiet ink pill for chrome contexts.
-  ink: "bg-surface-dark text-surface-dark-foreground hover:bg-surface-dark/90",
-  // Sage pill, ink text - the light brand accent.
-  sage: "bg-sage text-foreground hover:bg-sage/85",
-  // Clay pill, ink text - the warm material accent.
-  clay: "bg-clay text-foreground hover:bg-clay/85",
+  "ghost-dark":
+    "border border-surface-dark-foreground/25 bg-transparent text-surface-dark-foreground hover:bg-surface-dark-foreground/10",
 } as const;
 
 /**
  * The site's recurring call-to-action. Defaults to the contact page's booking
- * section so visitors stay on our site. Pass `href`/`label` to repurpose it
- * for secondary actions.
+ * section. Pass `href`/`label` to repurpose it for secondary actions.
  */
 export function BookCta({
   variant = "primary",
   label = "Book a demo",
   href = "/contact#book",
   className,
-  nudge = false,
   withArrow = false,
   size = "lg",
 }: BookCtaProps) {
   const isExternal = /^(https?:|mailto:)/.test(href);
   const classes = cn(
-    "group rounded-full px-6 text-sm",
+    "group rounded-full px-6 text-sm font-medium",
     variantClass[variant],
-    nudge && "cta-nudge",
     className,
   );
   const inner = (

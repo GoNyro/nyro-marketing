@@ -1,28 +1,57 @@
+import { GitBranch, PencilRuler, ToggleRight } from "lucide-react";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema, faqPageSchema } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
+import { Container } from "@/components/marketing/Container";
 import { HomeHero } from "@/components/marketing/sections/HomeHero";
-import { ProductTrio } from "@/components/marketing/sections/ProductTrio";
-import { QuoteLoop } from "@/components/marketing/sections/QuoteLoop";
-import { PlatformBand } from "@/components/marketing/sections/PlatformBand";
-import { CtaBand } from "@/components/marketing/sections/CtaBand";
+import { FeatureRows, type FeatureRow } from "@/components/marketing/sections/FeatureRows";
+import { ProductStack } from "@/components/marketing/sections/ProductStack";
+import { SlimCta } from "@/components/marketing/sections/SlimCta";
+import { PlaceholderSlab } from "@/components/marketing/sections/PlaceholderSlab";
 import {
   Faq,
   faqItemsToSchema,
   type FaqItem,
 } from "@/components/marketing/sections/Faq";
 import { Section } from "@/components/marketing/primitives/Section";
-import { SectionHeading } from "@/components/marketing/primitives/SectionHeading";
 
 export const metadata = buildMetadata({
-  // Brand-first <title> for the homepage (the one page where that's standard).
-  titleAbsolute: "Engage - Benchtop quoting and order platform",
-  // Kept as the punchy, benefit-led title on shared social/OG cards.
+  titleAbsolute: "Engage - The operating system for benchtop fabrication",
   title: "Your customers draw the top. Engage prices it live.",
   description:
     "Engage is the quoting and order platform for benchtop fabricators. Trade customers quote themselves against your catalog at their prices, orders flow through with CNC-ready geometry, and the full fabrication lifecycle is there when you want it.",
   path: "/",
 });
+
+const WHY_ROWS: FeatureRow[] = [
+  {
+    icon: PencilRuler,
+    title: "Self-serve quoting,\non your terms",
+    lead: "The people who know the job draw the job.",
+    body: [
+      "Kitchen companies, joiners and builders quote against the catalog you share with them, at the pricing tier you set for their account. Every change re-prices live against your rules - materials, machining, edgework, delivery.",
+      "Your estimator stops transcribing sketches and starts reviewing finished quotes.",
+    ],
+  },
+  {
+    icon: GitBranch,
+    title: "One geometry record,\nquote to CNC",
+    lead: "Drawn once, priced once, cut from the same data.",
+    body: [
+      "The shape a customer draws is the shape that's approved, ordered and exported - as DXF and CNC-ready files, straight into the production system you already run.",
+      "No re-drawing between systems means no transcription errors, and revisions become one edit to one record.",
+    ],
+  },
+  {
+    icon: ToggleRight,
+    title: "Upgrades without\nmigrations",
+    lead: "Start with the portal. Switch on the factory when ready.",
+    body: [
+      "A fabricator on the Customer Portal is the same tenant as one on the full Fabrication Platform - fewer modules turned on. Moving up is a module switch: no data migration, no re-onboarding, no second system.",
+      "Retail is the same story - the network's already under it.",
+    ],
+  },
+];
 
 const FAQS: FaqItem[] = [
   {
@@ -63,22 +92,48 @@ export default function HomePage() {
 
       <HomeHero />
 
-      {/* The stakes */}
-      <Section surface="card">
-        <SectionHeading
-          align="center"
-          eyebrow="The problem"
-          title="Quoting is your bottleneck, not your saw."
-          sub="Every benchtop starts as a phone call, a sketch and a spreadsheet - then waits in a queue for the one person who can price it. The factory can cut faster than the office can quote."
-          className="mx-auto max-w-2xl"
-        />
-      </Section>
+      {/* The argument */}
+      <section className="surface-gray border-t border-border">
+        <Container className="py-20 md:py-28">
+          <h2 className="display-md max-w-2xl text-balance">
+            Quoting is the bottleneck. So we rebuilt the whole counter.
+          </h2>
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">
+            Most factories can cut faster than the office can quote. Every job
+            starts as a phone call and a sketch, waits for the one person who
+            can price it, and gets re-typed at every step after that.
+          </p>
+          <FeatureRows rows={WHY_ROWS} className="mt-16" />
+        </Container>
+      </section>
 
-      <ProductTrio />
+      <SlimCta />
 
-      <QuoteLoop />
+      {/* Proof - built with a working fabricator. The film/testimonial gets
+          its own design session; the slab holds the space deliberately. */}
+      <section className="surface-gray border-t border-border">
+        <Container className="py-20 md:py-24">
+          <div className="mx-auto max-w-xl text-center">
+            <h2 className="display-md text-balance">
+              Built inside a working fabrication business.
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+              Engage was developed with BeautyCraft, the platform&apos;s
+              founding fabricator. The workflows exist because a real factory
+              needed them.
+            </p>
+          </div>
+          <PlaceholderSlab
+            note="BeautyCraft story · photography & testimonial — dedicated session"
+            className="mt-12"
+          />
+        </Container>
+      </section>
 
-      <PlatformBand />
+      {/* The three products */}
+      <div id="products" className="scroll-mt-16">
+        <ProductStack />
+      </div>
 
       {/* FAQ */}
       <Section surface="card">
@@ -88,7 +143,10 @@ export default function HomePage() {
         />
       </Section>
 
-      <CtaBand />
+      <SlimCta
+        title="See a quote price itself."
+        sub="Thirty minutes, your materials, your pricing rules - no prep required."
+      />
     </>
   );
 }

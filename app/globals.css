@@ -5,72 +5,70 @@
 
 :root {
   /* ── surfaces ───────────────────────────────────────────────────────── */
-  /* Shop-drawing palette: warm stone paper, deep green-charcoal ink. The
-     same warm-minimal register as the Engage product itself (olive/sage on
-     warm off-white), so the marketing site and the app feel like one brand. */
-  --background: oklch(0.9695 0.007 95);        /* stone paper canvas */
-  --foreground: oklch(0.26 0.018 150);         /* green-charcoal ink */
-  --card: oklch(1 0 0);                        /* white cards */
-  --card-foreground: oklch(0.26 0.018 150);
+  /* DOSS-register palette, Engage-tinted: near-black ink sections carry the
+     brand story; light sections are warm gray, not white; white is reserved
+     for app-UI mockups and cards. One accent (olive), used sparingly. */
+  --background: oklch(0.955 0.004 95);         /* warm paper */
+  --foreground: oklch(0.22 0.012 145);         /* green-cast ink */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.012 145);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.26 0.018 150);
+  --popover-foreground: oklch(0.22 0.012 145);
 
-  /* The ONE dark surface - footer / CTA bands. Dark olive-charcoal, not
-     neutral black: it keeps the green cast of the brand. */
-  --surface-dark: oklch(0.265 0.024 145);
-  --surface-dark-foreground: oklch(0.9695 0.007 95);
+  /* Dark ink surface - nav, hero, product-story sections, footer. */
+  --surface-dark: oklch(0.185 0.008 145);
+  --surface-dark-foreground: oklch(0.955 0.004 95);
+
+  /* Deep gray band - the "quiet" light section (trusted-by, stats). */
+  --surface-gray: oklch(0.917 0.005 95);
 
   /* ── brand olive (hue ~132) ─────────────────────────────────────────── */
-  /* `--brand` is the working olive - DECORATIVE only (fills, strokes,
-     drawing accents) - never carries text. Interactive/text olives below
-     are darkened to pass WCAG contrast on stone / with white text. */
-  --brand: oklch(0.58 0.1 132);
-  --brand-soft: oklch(0.930 0.024 130);        /* sage wash / hover */
-  --brand-strong: oklch(0.45 0.09 132);        /* accessible fill */
+  /* Decorative only - wireframe fills, small marks. Never carries text. */
+  --brand: oklch(0.58 0.11 132);
+  --brand-soft: oklch(0.93 0.02 130);
+  --brand-strong: oklch(0.45 0.09 132);        /* accessible on paper */
+  /* Accent for text/links on dark ink. */
+  --brand-bright: oklch(0.78 0.12 132);
 
-  --primary: oklch(0.45 0.09 132);             /* buttons - white text passes */
-  --primary-foreground: oklch(0.99 0 0);
-  --accent: oklch(0.45 0.09 132);              /* emphasis, links, heading accent */
+  /* Buttons are monochrome: ink pill on light, white pill on dark. */
+  --primary: oklch(0.22 0.012 145);
+  --primary-foreground: oklch(0.985 0.002 95);
+  --accent: oklch(0.45 0.09 132);              /* links, rare emphasis */
   --accent-foreground: oklch(0.99 0 0);
 
-  --secondary: oklch(0.945 0.008 95);
-  --secondary-foreground: oklch(0.26 0.018 150);
-  --muted: oklch(0.938 0.008 95);
-  --muted-foreground: oklch(0.47 0.015 150);
+  --secondary: oklch(0.93 0.005 95);
+  --secondary-foreground: oklch(0.22 0.012 145);
+  --muted: oklch(0.93 0.005 95);
+  --muted-foreground: oklch(0.45 0.012 145);
 
   --destructive: oklch(0.58 0.22 25);
   --destructive-foreground: oklch(0.99 0 0);
 
-  --border: oklch(0.26 0.018 150 / 11%);
-  --input: oklch(0.26 0.018 150 / 16%);
+  --border: oklch(0.22 0.012 145 / 12%);
+  --input: oklch(0.22 0.012 145 / 16%);
   --ring: oklch(0.5 0.09 132);
 
-  /* ── material accents ───────────────────────────────────────────────── */
-  /* Sage: light olive for decorative fills (drawing highlights, chips). */
-  --sage: oklch(0.78 0.06 133);
-  /* Clay: engineered-stone / timber warmth. Light = decorative, ink = text. */
-  --clay: oklch(0.72 0.09 55);
-  --clay-ink: oklch(0.5 0.11 50);
-  /* Slate: the retail channel's cool counterpoint. Same convention. */
-  --slate: oklch(0.72 0.07 240);
-  --slate-ink: oklch(0.46 0.09 245);
-  /* Inset "stage" panels - warm beige, one step below cards. */
-  --stage: oklch(0.943 0.011 95);
+  /* ── mockup-only status hues (inside app-UI fragments) ──────────────── */
+  --status-good: oklch(0.9 0.07 140);
+  --status-good-ink: oklch(0.42 0.09 140);
+  --status-warm: oklch(0.92 0.06 75);
+  --status-warm-ink: oklch(0.48 0.1 60);
+  --status-cool: oklch(0.92 0.04 240);
+  --status-cool-ink: oklch(0.45 0.08 245);
+  --stage: oklch(0.943 0.006 95);
 
-  /* Product inks - one hue per product, used for chips, section markers and
-     the three-product diagram. Darkened to carry small text on stone. */
-  --ink-customer: oklch(0.45 0.09 132);        /* olive - Customer Portal   */
-  --ink-fabricator: oklch(0.5 0.11 50);        /* clay  - Fabrication       */
-  --ink-retailer: oklch(0.46 0.09 245);        /* slate - Retailer Platform */
+  /* Product inks kept for small per-product marks. */
+  --ink-customer: oklch(0.45 0.09 132);
+  --ink-fabricator: oklch(0.5 0.11 50);
+  --ink-retailer: oklch(0.46 0.09 245);
 
-  /* chart tokens (mock product visuals) */
-  --chart-1: oklch(0.58 0.1 132);
+  --chart-1: oklch(0.58 0.11 132);
   --chart-2: oklch(0.62 0.11 55);
   --chart-3: oklch(0.6 0.09 240);
   --chart-4: oklch(0.68 0.08 160);
   --chart-5: oklch(0.72 0.08 85);
 
-  /* Drawing geometry: near-square cards; buttons stay pill via rounded-full. */
+  /* Near-square geometry; pills stay pills via rounded-full. */
   --radius: 0.375rem;
 }
 
@@ -84,10 +82,12 @@
 
   --color-surface-dark: var(--surface-dark);
   --color-surface-dark-foreground: var(--surface-dark-foreground);
+  --color-surface-gray: var(--surface-gray);
 
   --color-brand: var(--brand);
   --color-brand-soft: var(--brand-soft);
   --color-brand-strong: var(--brand-strong);
+  --color-brand-bright: var(--brand-bright);
 
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
@@ -103,11 +103,12 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  --color-sage: var(--sage);
-  --color-clay: var(--clay);
-  --color-clay-ink: var(--clay-ink);
-  --color-slate: var(--slate);
-  --color-slate-ink: var(--slate-ink);
+  --color-status-good: var(--status-good);
+  --color-status-good-ink: var(--status-good-ink);
+  --color-status-warm: var(--status-warm);
+  --color-status-warm-ink: var(--status-warm-ink);
+  --color-status-cool: var(--status-cool);
+  --color-status-cool-ink: var(--status-cool-ink);
   --color-stage: var(--stage);
 
   --color-ink-customer: var(--ink-customer);
@@ -122,7 +123,6 @@
 
   --font-sans: var(--font-instrument-sans);
   --font-mono: var(--font-plex-mono);
-  /* Display voice: Archivo, run slightly expanded - workshop signage. */
   --font-display: var(--font-archivo);
 
   --radius-sm: calc(var(--radius) - 4px);
@@ -131,18 +131,6 @@
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 12px);
   --radius-3xl: calc(var(--radius) + 28px);
-
-  /* Magic UI marquee (added by registry) */
-  --animate-marquee: marquee var(--duration) infinite linear;
-  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(calc(-100% - var(--gap))); }
-  }
-  @keyframes marquee-vertical {
-    from { transform: translateY(0); }
-    to { transform: translateY(calc(-100% - var(--gap))); }
-  }
 }
 
 @layer base {
@@ -164,14 +152,11 @@
     color: var(--surface-dark);
   }
 
-  /* Consistent keyboard focus on links (Button/Accordion carry their own ring). */
   a:focus-visible {
     outline: 2px solid var(--ring);
     outline-offset: 2px;
     border-radius: 0.25rem;
   }
-  /* On the dark surface (footer/CTA bands) the olive ring is too dim;
-     swap to the light foreground so focus clears WCAG 1.4.11 (3:1). */
   .surface-dark a:focus-visible {
     outline-color: var(--surface-dark-foreground);
   }
@@ -200,59 +185,72 @@
     background: var(--background);
     color: var(--foreground);
   }
+  .surface-gray {
+    background: var(--surface-gray);
+    color: var(--foreground);
+  }
   .surface-card {
     background: var(--card);
     color: var(--card-foreground);
   }
 
   /* ── type ────────────────────────────────────────────────────────────── */
-  /* Display voice: Archivo at semibold, slightly expanded - character
-     without shouting. */
+  /* One grotesque voice, medium weight, tight - never expanded, never
+     shouting. Sentence case with a full stop is the register. */
   .font-display {
     font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
-    font-weight: 620;
-    font-stretch: 108%;
-    letter-spacing: -0.015em;
-    line-height: 1.06;
+    font-weight: 540;
+    letter-spacing: -0.025em;
+    line-height: 1.08;
   }
-  /* Page hero heading - the h1 voice shared by the home hero and every
-     top-of-page hero, so they stay in lockstep on size and weight. */
   .display-hero {
     font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
-    font-weight: 680;
-    font-stretch: 110%;
-    font-size: clamp(2.2rem, 4vw, 3.4rem);
-    line-height: 1.1;
-    letter-spacing: -0.025em;
+    font-weight: 550;
+    font-size: clamp(2.1rem, 3.4vw, 3.25rem);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
   }
-  .display-xl { @apply font-display text-5xl sm:text-6xl md:text-7xl lg:text-[5.25rem]; }
-  .display-lg { @apply font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl; }
-  .display-md { @apply font-display text-3xl sm:text-4xl md:text-5xl; }
+  .display-xl { @apply font-display text-5xl sm:text-6xl md:text-7xl; }
+  .display-lg { @apply font-display text-4xl sm:text-5xl md:text-6xl; }
+  .display-md { @apply font-display text-3xl sm:text-4xl md:text-[2.75rem]; }
   .display-sm { @apply font-display text-2xl sm:text-3xl; }
 
-  /* Plex Mono eyebrow / dimension label - the "measured drawing" signal. */
+  /* Small technical label - used sparingly (tab strips, mockup chrome,
+     wireframe annotations), muted by default. */
   .label-mono {
     font-family: var(--font-mono), ui-monospace, monospace;
-    @apply text-xs font-medium uppercase tracking-[0.18em];
+    @apply text-xs font-medium uppercase tracking-[0.14em];
   }
 
-  /* ── drawing-sheet scaffolding ───────────────────────────────────────── */
-  /* Fine graph-paper grid - the cutting-sheet ground the canvas draws on. */
+  /* ── engineered grounds ─────────────────────────────────────────────── */
+  /* Fine graph grid for light insets (drawing panels). */
   .blueprint-grid {
     background-image:
-      linear-gradient(to right, oklch(0.26 0.018 150 / 0.055) 1px, transparent 1px),
-      linear-gradient(to bottom, oklch(0.26 0.018 150 / 0.055) 1px, transparent 1px);
+      linear-gradient(to right, oklch(0.22 0.012 145 / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(0.22 0.012 145 / 0.05) 1px, transparent 1px);
     background-size: 48px 48px;
   }
-  /* Same grid, faint stone lines, for dark panels (footer). */
-  .blueprint-grid-dark {
+  /* Dark ink ground with a faint diagonal survey grid - the hero/product
+     sections' atmosphere. Two crossing diagonal line families, very low
+     contrast, plus a soft vignette handled by the section itself. */
+  .ink-grid {
     background-image:
-      linear-gradient(to right, oklch(0.9695 0.007 95 / 0.06) 1px, transparent 1px),
-      linear-gradient(to bottom, oklch(0.9695 0.007 95 / 0.06) 1px, transparent 1px);
-    background-size: 48px 48px;
+      repeating-linear-gradient(
+        63deg,
+        oklch(0.955 0.004 95 / 0.045) 0,
+        oklch(0.955 0.004 95 / 0.045) 1px,
+        transparent 1px,
+        transparent 110px
+      ),
+      repeating-linear-gradient(
+        -63deg,
+        oklch(0.955 0.004 95 / 0.045) 0,
+        oklch(0.955 0.004 95 / 0.045) 1px,
+        transparent 1px,
+        transparent 110px
+      );
   }
 
-  /* The measuring dash - used on the hero drawing's dimension lines. */
   .dim-dash {
     animation: dim-dash 1.4s linear infinite;
   }
@@ -262,19 +260,6 @@
     }
   }
 
-  /* CTA micro-nudge - a single hop, classier than a pulse. */
-  @keyframes cta-nudge {
-    0%, 86%, 100% { transform: translateY(0); }
-    91% { transform: translateY(-3px); }
-    96% { transform: translateY(0); }
-  }
-  .cta-nudge {
-    animation: cta-nudge 3.6s ease-in-out infinite;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .cta-nudge { animation: none; }
-  }
-
   /* ── blog body typography ───────────────────────────────────────────── */
   .prose-like {
     @apply text-base leading-7 text-foreground/90;
@@ -282,7 +267,6 @@
   }
   .prose-like h2 {
     @apply font-display text-3xl sm:text-4xl mt-12 mb-4 text-foreground;
-    letter-spacing: -0.02em;
   }
   .prose-like h3 {
     @apply font-display text-2xl mt-9 mb-3 text-foreground;
@@ -320,38 +304,20 @@
   .prose-like hr {
     @apply my-10 border-border;
   }
+
+  .prose-like table {
+    @apply my-6 w-full border-collapse text-sm;
+  }
+  .prose-like th {
+    @apply border-b border-border pb-2 pr-6 text-left font-semibold;
+  }
+  .prose-like td {
+    @apply border-b border-border/60 py-2 pr-6 align-top text-foreground/85;
+  }
 }
 
 @keyframes dim-dash {
   to {
     stroke-dashoffset: -12;
-  }
-}
-
-/* Magic UI marquee (components/ui/marquee.tsx). */
-@theme inline {
-  --animate-marquee: marquee var(--duration) linear infinite;
-  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
-}
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(calc(-100% - var(--gap)));
-  }
-}
-@keyframes marquee-vertical {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(calc(-100% - var(--gap)));
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .animate-marquee,
-  .animate-marquee-vertical {
-    animation: none;
   }
 }

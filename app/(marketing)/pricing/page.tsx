@@ -3,11 +3,10 @@ import { Check } from "lucide-react";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema, faqPageSchema } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
+import { Container } from "@/components/marketing/Container";
 import { Section } from "@/components/marketing/primitives/Section";
-import { SectionHeading } from "@/components/marketing/primitives/SectionHeading";
 import { BookCta } from "@/components/marketing/primitives/BookCta";
-import { Reveal } from "@/components/marketing/primitives/Reveal";
-import { CtaBand } from "@/components/marketing/sections/CtaBand";
+import { SlimCta } from "@/components/marketing/sections/SlimCta";
 import {
   Faq,
   faqItemsToSchema,
@@ -25,8 +24,6 @@ export const metadata = buildMetadata({
 type Plan = {
   name: string;
   href: string;
-  ink: string;
-  rule: string;
   who: string;
   blurb: string;
   includes: string[];
@@ -38,8 +35,6 @@ const PLANS: Plan[] = [
   {
     name: "Customer Portal",
     href: "/customer",
-    ink: "text-ink-customer",
-    rule: "bg-ink-customer",
     who: "Fabricators who want quoting off their desk first",
     blurb:
       "Self-serve quoting for your trade customers on your catalog and pricing, with orders and DXF/CNC export into your existing production setup.",
@@ -56,8 +51,6 @@ const PLANS: Plan[] = [
   {
     name: "Fabrication Platform",
     href: "/fabricator",
-    ink: "text-ink-fabricator",
-    rule: "bg-ink-fabricator",
     who: "Fabricators ready to run the lifecycle on one system",
     blurb:
       "Everything in the Customer Portal plus staff quoting, production scheduling, floor tablets, stock, dispatch, financials integration and analytics.",
@@ -73,8 +66,6 @@ const PLANS: Plan[] = [
   {
     name: "Retailer Platform",
     href: "/retailer",
-    ink: "text-ink-retailer",
-    rule: "bg-ink-retailer",
     who: "Retail chains selling benchtops in-store",
     blurb:
       "In-store quoting across your partner fabricators' live catalogs, your markup and branding on top, orders routed for fulfilment. Rolled out as a partnership.",
@@ -119,52 +110,59 @@ export default function PricingPage() {
       />
       <JsonLd data={faqPageSchema(faqItemsToSchema(FAQS))} />
 
-      <Section className="border-t-0">
-        <SectionHeading
-          as="h1"
-          eyebrow="Pricing"
-          title="Pay for the surface you use."
-          titleClassName="display-hero"
-          sub="Engage is priced to follow the product path: start where the pain is, switch on more when you're ready. Every engagement is scoped to your operation - no per-seat games."
-        />
-      </Section>
+      <section className="surface-cream">
+        <Container className="pb-4 pt-16 md:pt-24">
+          <p className="label-mono text-[0.7rem] text-muted-foreground">
+            Pricing
+          </p>
+          <h1 className="display-hero mt-5 max-w-2xl text-balance">
+            Pay for the surface you use.
+          </h1>
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">
+            Engage is priced to follow the product path: start where the pain
+            is, switch on more when you&apos;re ready. Every engagement is
+            scoped to your operation - no per-seat games.
+          </p>
+        </Container>
+      </section>
 
-      <Section surface="card" id="plans">
-        <div className="grid gap-6 lg:grid-cols-3">
-          {PLANS.map((plan, i) => (
-            <Reveal key={plan.name} delay={i * 0.08} className="flex">
+      <section id="plans" className="surface-cream">
+        <Container className="py-16 md:py-20">
+          <div className="grid gap-x-10 gap-y-14 lg:grid-cols-3">
+            {PLANS.map((plan) => (
               <article
+                key={plan.name}
                 className={cn(
-                  "flex w-full flex-col rounded-xl border bg-card p-7",
+                  "flex flex-col border-t pt-6",
                   plan.highlight
-                    ? "border-brand-strong/40 shadow-lg"
-                    : "border-border",
+                    ? "border-t-2 border-foreground"
+                    : "border-foreground/25",
                 )}
               >
-                <div className={cn("h-1 w-10 rounded-full", plan.rule)} />
                 {plan.highlight ? (
-                  <p className="label-mono mt-5 text-[0.6rem] text-accent">
+                  <p className="label-mono mb-3 text-[0.65rem] text-accent">
                     First to market · start here
                   </p>
                 ) : null}
-                <h2 className={cn("font-display text-2xl text-foreground", plan.highlight ? "mt-2" : "mt-5")}>
+                <h2 className="font-display text-2xl text-foreground">
                   {plan.name}
                 </h2>
-                <p className={cn("label-mono mt-2 text-[0.6rem]", plan.ink)}>
-                  {plan.who}
-                </p>
-                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                <p className="mt-1.5 text-sm text-muted-foreground">{plan.who}</p>
+                <p className="mt-4 text-[0.95rem] leading-relaxed text-foreground/75">
                   {plan.blurb}
                 </p>
                 <ul className="mt-6 space-y-2.5 text-sm text-foreground/85">
                   {plan.includes.map((item) => (
                     <li key={item} className="flex items-start gap-2.5">
-                      <Check className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden />
+                      <Check
+                        className="mt-0.5 size-4 shrink-0 text-foreground/50"
+                        aria-hidden
+                      />
                       {item}
                     </li>
                   ))}
                 </ul>
-                <div className="mt-auto flex flex-col gap-3 pt-8">
+                <div className="mt-auto flex items-center gap-5 pt-8">
                   <BookCta
                     label={plan.cta}
                     variant={plan.highlight ? "primary" : "secondary"}
@@ -172,37 +170,30 @@ export default function PricingPage() {
                   />
                   <Link
                     href={plan.href}
-                    className="text-center text-sm font-medium text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
+                    className="text-sm font-medium text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
                   >
-                    Product details →
+                    Details →
                   </Link>
                 </div>
               </article>
-            </Reveal>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        <p className="mt-10 text-center text-sm text-muted-foreground">
-          Every plan includes onboarding, support and the shared platform
-          underneath - one login, one database, no data migrations between
-          tiers.
-        </p>
-      </Section>
+          <p className="mt-14 max-w-xl text-sm text-muted-foreground">
+            Every plan includes onboarding, support and the shared platform
+            underneath - one login, one database, no data migrations between
+            tiers.
+          </p>
+        </Container>
+      </section>
 
-      <Section>
+      <Section surface="card">
         <Faq items={FAQS} sub="How Engage engagements are scoped and priced." />
       </Section>
 
-      <CtaBand
-        eyebrow="Next step"
-        title={
-          <>
-            Get a number scoped
-            <br className="hidden sm:block" /> to your factory.
-          </>
-        }
-        sub="Thirty minutes, your materials, your quoting volume - and a clear price with nothing generic about it."
-        secondary={{ label: "Compare the products", href: "/#platform" }}
+      <SlimCta
+        title="Get a number scoped to your factory."
+        sub="Thirty minutes, your materials, your quoting volume - a clear price with nothing generic about it."
       />
     </>
   );

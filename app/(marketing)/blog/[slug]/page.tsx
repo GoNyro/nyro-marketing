@@ -9,7 +9,7 @@ import { articleSchema, breadcrumbSchema } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
 import { getAllPostSlugs, getPostBySlug } from "@/lib/mdx";
 import { mdxComponents } from "@/mdx-components";
-import { CtaBand } from "@/components/marketing/sections/CtaBand";
+import { SlimCta } from "@/components/marketing/sections/SlimCta";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -67,7 +67,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   return (
     <>
-      <article className="surface-cream pb-16 pt-28 sm:pt-32 lg:pt-36">
+      <article className="surface-cream pb-16 pt-16 md:pt-24">
       <JsonLd
         data={breadcrumbSchema([
           { name: "Home", href: "/" },
@@ -133,7 +133,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         </div>
       </Container>
       </article>
-      <CtaBand />
+      <SlimCta />
     </>
   );
 }

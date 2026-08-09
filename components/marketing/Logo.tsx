@@ -47,7 +47,7 @@ export function Wordmark({
         tone === "cream" ? "text-surface-dark-foreground" : "text-foreground",
         className,
       )}
-      style={{ fontWeight: 660, fontStretch: "106%", letterSpacing: "-0.03em" }}
+      style={{ fontWeight: 600, letterSpacing: "-0.03em" }}
     >
       engage
     </span>

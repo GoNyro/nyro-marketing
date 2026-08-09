@@ -34,16 +34,29 @@ founding fabricator and the only named tenant.
 - `scripts/generate-icons.mjs` — regenerates favicons/PWA icons from `app/icon.svg`.
 - `mdx-components.tsx` — global MDX component overrides.
 
-## Design system (shop-drawing identity)
+## Design system (DOSS register, Engage-tinted)
 
-- Stone-paper background, green-charcoal ink, **olive** as the only
-  interactive accent; clay and slate are per-product inks
-  (`--ink-customer` / `--ink-fabricator` / `--ink-retailer`).
-- Type: Archivo (display, slightly expanded) · Instrument Sans (body) ·
-  IBM Plex Mono (eyebrows/dimension labels, via `.label-mono`).
-- Signature motif: CAD dimension lines (see `QuoteSheet.tsx` and `.dim-dash`).
-- Tokens live in `app/globals.css`. Light versions of accents are decorative
-  only; darkened `*-ink` variants carry text (WCAG AA on the stone surface).
+Reference: doss.com's professionalism - near-black ink sections, warm-gray
+light sections, one sparing accent, realistic product-UI mockups.
+
+- Surfaces: `surface-dark` (ink, with `.ink-grid` diagonal survey lines) for
+  nav, heroes, product stories, footer; `surface-gray` / `surface-cream` for
+  editorial sections; white only for cards and app mockups.
+- Buttons are monochrome pills (`BookCta`: primary ink / inverse white /
+  secondary border / ghost-dark). Olive is decorative + links only
+  (`brand-bright` on dark).
+- Type: one grotesque voice - Archivo at medium weight, tight, sentence case
+  with a full stop. Body Instrument Sans; IBM Plex Mono for tiny technical
+  labels (`.label-mono`), always muted.
+- Patterns: `FeatureRows` (hairline rows, never icon-card grids), `SlimCta`
+  (statement left, one pill right - never a billboard band), `TabStrip`,
+  `ProductStack` (dark, side menu + iso cubes), `AppWindow` +
+  `QuotesTable`/`CanvasScreen` (pixel-realistic mockups - the credibility
+  device), `IsoStack` (hero isometric), `PlaceholderSlab` (deliberate gaps
+  for photography/testimonial sessions).
+- No scroll-entrance animation above the fold - heroes render statically.
+- Tokens live in `app/globals.css`. Mockup-only status hues are
+  `--status-good/warm/cool` (+ `-ink` text variants).
 
 ## Conventions
 
