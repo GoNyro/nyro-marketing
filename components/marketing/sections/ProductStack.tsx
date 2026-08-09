@@ -9,26 +9,62 @@ import { cn } from "@/lib/utils";
  */
 
 function IsoCube({ label, className }: { label: string; className?: string }) {
+  const uid = label.toLowerCase().replace(/[^a-z]/g, "");
   return (
-    <svg viewBox="0 0 160 150" className={cn("w-36", className)} aria-hidden>
+    <svg viewBox="0 0 176 176" className={cn("w-40", className)} aria-hidden>
+      <defs>
+        {/* light from upper-left: top face brightest, left mid, right dark */}
+        <linearGradient id={`${uid}-top`} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="oklch(0.70 0.115 130)" />
+          <stop offset="1" stopColor="oklch(0.56 0.11 132)" />
+        </linearGradient>
+        <linearGradient id={`${uid}-left`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="oklch(0.46 0.095 132)" />
+          <stop offset="1" stopColor="oklch(0.36 0.075 132)" />
+        </linearGradient>
+        <linearGradient id={`${uid}-right`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="oklch(0.40 0.085 132)" />
+          <stop offset="1" stopColor="oklch(0.30 0.06 132)" />
+        </linearGradient>
+        <radialGradient id={`${uid}-shadow`} cx="0.5" cy="0.5" r="0.5">
+          <stop offset="0" stopColor="black" stopOpacity="0.5" />
+          <stop offset="1" stopColor="black" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+
+      {/* ground shadow */}
+      <ellipse cx="88" cy="152" rx="66" ry="14" fill={`url(#${uid}-shadow)`} />
+
+      {/* faces */}
+      <path d="M88 24 L152 56 L88 88 L24 56 Z" fill={`url(#${uid}-top)`} />
+      <path d="M24 56 L88 88 L88 144 L24 112 Z" fill={`url(#${uid}-left)`} />
+      <path d="M152 56 L88 88 L88 144 L152 112 Z" fill={`url(#${uid}-right)`} />
+
+      {/* crisp lit edges */}
       <path
-        d="M80 15 L145 47 L80 79 L15 47 Z"
-        fill="oklch(0.60 0.115 132)"
-        stroke="oklch(0.85 0.06 130 / 0.4)"
+        d="M24 56 L88 24 L152 56"
+        fill="none"
+        stroke="oklch(0.85 0.07 130 / 0.6)"
         strokeWidth="1"
+        strokeLinejoin="round"
       />
-      <path d="M15 47 L80 79 L80 135 L15 103 Z" fill="oklch(0.40 0.085 132)" />
-      <path d="M145 47 L80 79 L80 135 L145 103 Z" fill="oklch(0.49 0.10 132)" />
+      <path
+        d="M24 56 L88 88 L152 56 M88 88 L88 144"
+        fill="none"
+        stroke="oklch(0.2 0.02 140 / 0.5)"
+        strokeWidth="0.75"
+      />
+
       <text
-        x={80}
-        y={112}
+        x={88}
+        y={122}
         textAnchor="middle"
         style={{
           fontFamily: "var(--font-plex-mono)",
           fontSize: "9px",
-          letterSpacing: "0.14em",
+          letterSpacing: "0.16em",
         }}
-        fill="oklch(0.97 0.005 95 / 0.9)"
+        fill="oklch(0.97 0.005 95 / 0.85)"
       >
         {label}
       </text>

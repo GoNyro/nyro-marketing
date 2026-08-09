@@ -8,6 +8,8 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema, faqPageSchema } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
 import { Container } from "@/components/marketing/Container";
+import { AppWindow } from "@/components/marketing/mockups/AppWindow";
+import { QuotesTable } from "@/components/marketing/mockups/QuotesTable";
 import { Section } from "@/components/marketing/primitives/Section";
 import { BookCta } from "@/components/marketing/primitives/BookCta";
 import { FeatureRows, type FeatureRow } from "@/components/marketing/sections/FeatureRows";
@@ -173,6 +175,13 @@ export default function FabricatorPage() {
                 </li>
               ))}
             </ol>
+          </div>
+
+          {/* the office view: every job, one record */}
+          <div className="mt-14">
+            <AppWindow>
+              <QuotesTable />
+            </AppWindow>
           </div>
         </Container>
       </section>
