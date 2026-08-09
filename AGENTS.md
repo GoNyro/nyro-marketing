@@ -29,7 +29,7 @@ founding fabricator and the only named tenant.
 - `lib/schema.ts` — JSON-LD builders (`articleSchema`, `faqPageSchema`, `breadcrumbSchema`, etc.).
 - `lib/mdx.ts` — MDX loader (frontmatter, reading time).
 - `components/seo/JsonLd.tsx` — typed JSON-LD renderer; wrap structured data in this.
-- `components/marketing/` — `Nav`, `Footer`, `Container`, sections and the `QuoteSheet` hero visual. shadcn primitives in `components/ui/`.
+- `components/marketing/` — `Nav`, `Footer`, `Container`, `sections/`, `mockups/` (AppWindow, QuotesTable, CanvasScreen) and `visuals/IsoStack`. shadcn primitives in `components/ui/`.
 - `app/llms.txt/`, `app/llms-full.txt/` — AI crawler hint routes. Update when content changes.
 - `scripts/generate-icons.mjs` — regenerates favicons/PWA icons from `app/icon.svg`.
 - `mdx-components.tsx` — global MDX component overrides.
