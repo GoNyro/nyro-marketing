@@ -1,0 +1,110 @@
+import Link from "next/link";
+import { siteConfig } from "@/lib/site";
+import { Container } from "@/components/marketing/Container";
+import { Lockup } from "@/components/marketing/Logo";
+import { BookCta } from "@/components/marketing/primitives/BookCta";
+
+const currentYear = new Date().getFullYear();
+
+export function Footer() {
+  return (
+    <footer className="surface-dark relative overflow-hidden">
+      <div
+        aria-hidden
+        className="blueprint-grid-dark pointer-events-none absolute inset-0"
+        style={{
+          maskImage:
+            "radial-gradient(ellipse 100% 90% at 50% 100%, black 30%, transparent 90%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 100% 90% at 50% 100%, black 30%, transparent 90%)",
+        }}
+      />
+      <Container className="relative py-20">
+        <div className="grid gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-5">
+            <Link
+              href="/"
+              aria-label={`${siteConfig.name} home`}
+              className="inline-flex items-center"
+            >
+              <Lockup tone="cream" />
+            </Link>
+            <p className="mt-6 max-w-sm text-base text-surface-dark-foreground/70">
+              The quoting and order platform for benchtop fabricators. Your
+              customers draw the job, Engage prices it live, and the order
+              flows through to your factory floor.
+            </p>
+            <div className="mt-8">
+              <BookCta variant="inverse" />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-10 sm:grid-cols-2 lg:col-span-7 lg:justify-items-end">
+            {siteConfig.footerNav.map((group) => (
+              <div key={group.heading}>
+                <h3 className="label-mono text-surface-dark-foreground/50">
+                  {group.heading}
+                </h3>
+                <ul className="mt-5 space-y-3">
+                  {group.links.map((link) => (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        className="text-sm text-surface-dark-foreground/80 transition-colors hover:text-surface-dark-foreground"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-16 flex flex-col gap-4 border-t border-surface-dark-foreground/15 pt-8 text-xs text-surface-dark-foreground/55 sm:flex-row sm:items-center sm:justify-between">
+          <p>
+            © {currentYear} {siteConfig.legal.entity}. Engage is a{" "}
+            <a
+              href={siteConfig.company.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline-offset-4 transition-colors hover:text-surface-dark-foreground hover:underline"
+            >
+              Nyro
+            </a>{" "}
+            product. All rights reserved.
+          </p>
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+            <Link
+              href="/privacy"
+              className="transition-colors hover:text-surface-dark-foreground"
+            >
+              Privacy
+            </Link>
+            <Link
+              href="/terms"
+              className="transition-colors hover:text-surface-dark-foreground"
+            >
+              Terms
+            </Link>
+            <a
+              href={siteConfig.socials.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors hover:text-surface-dark-foreground"
+            >
+              LinkedIn
+            </a>
+            <a
+              href={`mailto:${siteConfig.contactEmail}`}
+              className="transition-colors hover:text-surface-dark-foreground"
+            >
+              {siteConfig.contactEmail}
+            </a>
+          </div>
+        </div>
+      </Container>
+    </footer>
+  );
+}

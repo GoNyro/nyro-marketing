@@ -1,0 +1,63 @@
+---
+title: "Draw it once: why benchtop geometry should never be re-entered"
+description: "Every time a benchtop's shape is re-drawn between quote and CNC, the job absorbs risk. The fix is structural: one geometry record that travels the whole lifecycle."
+date: "2026-08-02"
+author: "Nyro Team"
+tags: ["Production"]
+---
+
+Ask a production manager where remakes come from and you'll hear the same
+stories: the mitre that was on the quote but not the cut list, the cutout
+that moved 40mm between revision B and revision C, the splashback that was
+measured in millimetres and typed in centimetres.
+
+These aren't carelessness. They're transcription - the same shape being
+re-entered by different hands into systems that don't talk.
+
+## The lifecycle of a shape
+
+In a typical fabrication business, one benchtop's geometry gets created
+several times:
+
+| Stage | Where the shape lives | Who re-enters it |
+| --- | --- | --- |
+| Enquiry | A sketch or a photo | The customer |
+| Quote | The estimator's drawing or spreadsheet | The estimator |
+| Order confirmation | A PDF the customer signs | Nobody - but nobody checks it either |
+| Templating / final check | The templater's file | The templater |
+| Production | CAD/CAM, nesting | A programmer |
+
+Each hop is a chance for the shape to drift. Worse, when a revision lands
+mid-stream, it has to be applied *in every copy* - and the copies have no
+way of knowing they're stale.
+
+## What "one geometry" means in practice
+
+The alternative is structural, not procedural: the shape is captured once,
+as data - not as a picture of data - and every later stage reads the same
+record.
+
+- **At quote time**, the drawing is the source of truth. Edges, cutouts,
+  thicknesses and finishes are attributes of the geometry, not notes beside
+  it.
+- **At approval**, the customer signs off the actual record - so what was
+  approved is what gets made, by definition.
+- **At production**, the DXF and CNC-ready files are *exports of* the
+  record, not re-drawings. If revision C moved the cutout, there is no
+  revision B left anywhere to cut from.
+
+This is the core architectural decision in Engage: the quote canvas, the
+order and the CNC export all read one geometry record. It's why a quote a
+trade customer draws in the [Customer Portal](/customer) can land in a
+factory as a cuttable file, and why the
+[Fabrication Platform](/fabricator)'s floor tablets always show the current
+shape.
+
+## The payoff shows up in the remake bin
+
+Fewer remakes is the visible win, but the quiet one is bigger:
+**revisions get cheap.** When a change is one edit to one record, saying
+"yes, we can move the sink" stops being an internal negotiation about who
+re-draws what. The customer gets flexibility; the factory keeps certainty.
+
+The shape is the job. Draw it once.
