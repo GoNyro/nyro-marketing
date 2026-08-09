@@ -20,7 +20,7 @@ export function Footer() {
             </Link>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-surface-dark-foreground/60">
               The quoting and order platform for benchtop fabricators. Your
-              customers draw the job, Engage prices it live, and the order
+              customers draw the job, Nyro prices it live, and the order
               flows through to the factory floor.
             </p>
           </div>
@@ -49,18 +49,7 @@ export function Footer() {
         </div>
 
         <div className="mt-14 flex flex-col gap-4 border-t border-surface-dark-foreground/10 pt-7 text-xs text-surface-dark-foreground/45 sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            © {currentYear} {siteConfig.legal.entity}. Engage is a{" "}
-            <a
-              href={siteConfig.company.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline-offset-4 transition-colors hover:text-surface-dark-foreground hover:underline"
-            >
-              Nyro
-            </a>{" "}
-            product. All rights reserved.
-          </p>
+          <p>© {currentYear} {siteConfig.legal.entity}. All rights reserved.</p>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             <Link
               href="/privacy"

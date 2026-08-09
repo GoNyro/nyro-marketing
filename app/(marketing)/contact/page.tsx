@@ -11,7 +11,7 @@ import { siteConfig } from "@/lib/site";
 export const metadata = buildMetadata({
   title: "Book a demo",
   description:
-    "Book a 30-minute Engage walkthrough. We'll load a sample catalog with your materials and pricing and show you the portal exactly as your trade customers would see it.",
+    "Book a 30-minute Nyro walkthrough. We'll load a sample catalog with your materials and pricing and show you the portal exactly as your trade customers would see it.",
   path: "/contact",
 });
 

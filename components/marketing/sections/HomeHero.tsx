@@ -23,7 +23,7 @@ export function HomeHero() {
       <Container className="relative grid items-center gap-10 pb-4 pt-16 md:pt-20 lg:grid-cols-2">
         <div className="flex max-w-xl flex-col items-start gap-6">
           <h1 className="display-hero text-balance text-surface-dark-foreground">
-            Engage is the operating system for benchtop fabrication
+            Nyro is the operating system for benchtop fabrication
           </h1>
           <p
             data-speakable

@@ -216,7 +216,7 @@ export default function FabricatorPage() {
       <Section surface="card">
         <Faq
           items={FAQS}
-          sub="What owners and ops managers ask about running the factory on Engage."
+          sub="What owners and ops managers ask about running the factory on Nyro."
         />
       </Section>
 

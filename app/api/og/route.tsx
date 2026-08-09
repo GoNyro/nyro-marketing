@@ -94,7 +94,7 @@ export async function GET(request: Request) {
               letterSpacing: "-0.03em",
             }}
           >
-            engage
+            nyro
           </div>
         </div>
 

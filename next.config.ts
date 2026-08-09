@@ -16,7 +16,7 @@ const nextConfig: NextConfig = {
         headers: [
           // Force HTTPS for two years, including subdomains. `preload` is
           // deliberately omitted - submitting to the HSTS preload list is
-          // effectively irreversible and would cover every *.engage.online
+          // effectively irreversible and would cover every *.gonyro.com
           // subdomain, including the platform app and every tenant subdomain.
           // Add it only once every subdomain is known-good on HTTPS.
           {

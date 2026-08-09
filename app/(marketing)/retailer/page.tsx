@@ -95,7 +95,7 @@ const FAQS: FaqItem[] = [
   },
   {
     q: "Which fabricators can we quote against?",
-    a: "Any fabricator on Engage who agrees a relationship with you - the fabricator controls what's shared. The network is growing fabricator by fabricator; talk to us about the regions and partners you need covered.",
+    a: "Any fabricator on Nyro who agrees a relationship with you - the fabricator controls what's shared. The network is growing fabricator by fabricator; talk to us about the regions and partners you need covered.",
   },
 ];
 

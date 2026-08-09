@@ -32,7 +32,7 @@ export function LogoGlyph({ className }: { className?: string }) {
   );
 }
 
-/** "engage" wordmark set in the display face. */
+/** "nyro" wordmark set in the display face. */
 export function Wordmark({
   className,
   tone = "ink",
@@ -49,7 +49,7 @@ export function Wordmark({
       )}
       style={{ fontWeight: 600, letterSpacing: "-0.03em" }}
     >
-      engage
+      nyro
     </span>
   );
 }

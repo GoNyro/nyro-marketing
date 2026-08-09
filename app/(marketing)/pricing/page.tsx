@@ -17,7 +17,7 @@ import { cn } from "@/lib/utils";
 export const metadata = buildMetadata({
   title: "Pricing",
   description:
-    "Engage pricing follows the product path: start with the Customer Portal, switch on the full Fabrication Platform when you're ready, partner with us on the Retailer Platform. Scoped to your operation - talk to us for a quote.",
+    "Nyro pricing follows the product path: start with the Customer Portal, switch on the full Fabrication Platform when you're ready, partner with us on the Retailer Platform. Scoped to your operation - talk to us for a quote.",
   path: "/pricing",
 });
 
@@ -119,7 +119,7 @@ export default function PricingPage() {
             Pay for the surface you use.
           </h1>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">
-            Engage is priced to follow the product path: start where the pain
+            Nyro is priced to follow the product path: start where the pain
             is, switch on more when you&apos;re ready. Every engagement is
             scoped to your operation - no per-seat games.
           </p>
@@ -188,7 +188,7 @@ export default function PricingPage() {
       </section>
 
       <Section surface="card">
-        <Faq items={FAQS} sub="How Engage engagements are scoped and priced." />
+        <Faq items={FAQS} sub="How Nyro engagements are scoped and priced." />
       </Section>
 
       <SlimCta

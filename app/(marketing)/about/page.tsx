@@ -10,7 +10,7 @@ import { PlaceholderSlab } from "@/components/marketing/sections/PlaceholderSlab
 export const metadata = buildMetadata({
   title: "About",
   description:
-    "Nyro builds Engage, the quoting and order platform for the benchtop industry. Developed inside BeautyCraft, a working New Zealand fabrication business, and built to serve the whole industry.",
+    "Nyro builds Nyro, the quoting and order platform for the benchtop industry. Developed inside BeautyCraft, a working New Zealand fabrication business, and built to serve the whole industry.",
   path: "/about",
 });
 
@@ -69,8 +69,8 @@ export default function AboutPage() {
             Software for the people who make the tops.
           </h1>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">
-            Nyro is a New Zealand software company building Engage - the
-            quoting and order platform for the benchtop industry.
+            Nyro is a New Zealand software company building the quoting and
+            order platform for the benchtop industry.
           </p>
         </Container>
       </section>
@@ -86,7 +86,7 @@ export default function AboutPage() {
             </div>
             <div className="prose-like lg:col-span-7">
               <p data-speakable>
-                Engage started inside BeautyCraft, a working benchtop
+                Nyro started inside BeautyCraft, a working benchtop
                 fabrication business in New Zealand. The problem was obvious
                 from the front office: the factory could cut faster than the
                 office could quote. Every job began as a phone call and a
@@ -103,7 +103,7 @@ export default function AboutPage() {
                 isn&apos;t one company&apos;s.
               </p>
               <p>
-                Today Engage is three products on that one platform: a customer
+                Today Nyro is three products on that one platform: a customer
                 portal fabricators hand to their trade accounts, a full
                 fabrication operating system, and a retailer surface that
                 connects stores to the fabricator network. The plan is

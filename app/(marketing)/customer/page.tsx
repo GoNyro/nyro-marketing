@@ -65,7 +65,7 @@ const ROWS: FeatureRow[] = [
 const FAQS: FaqItem[] = [
   {
     q: "Does the Customer Portal replace my production system?",
-    a: "No - it runs in front of it. Quoting, approvals and order intake happen on Engage; approved jobs export as DXF and CNC-ready files into whatever you run today. When you're ready to run production on Engage too, the Fabrication Platform is a module switch away.",
+    a: "No - it runs in front of it. Quoting, approvals and order intake happen on Nyro; approved jobs export as DXF and CNC-ready files into whatever you run today. When you're ready to run production on Nyro too, the Fabrication Platform is a module switch away.",
   },
   {
     q: "Can my customers see my cost structure?",

@@ -16,10 +16,10 @@ import {
 import { Section } from "@/components/marketing/primitives/Section";
 
 export const metadata = buildMetadata({
-  titleAbsolute: "Engage - The operating system for benchtop fabrication",
-  title: "Your customers draw the top. Engage prices it live.",
+  titleAbsolute: "Nyro - The operating system for benchtop fabrication",
+  title: "Your customers draw the top. Nyro prices it live.",
   description:
-    "Engage is the quoting and order platform for benchtop fabricators. Trade customers quote themselves against your catalog at their prices, orders flow through with CNC-ready geometry, and the full fabrication lifecycle is there when you want it.",
+    "Nyro is the quoting and order platform for benchtop fabricators. Trade customers quote themselves against your catalog at their prices, orders flow through with CNC-ready geometry, and the full fabrication lifecycle is there when you want it.",
   path: "/",
 });
 
@@ -55,16 +55,16 @@ const WHY_ROWS: FeatureRow[] = [
 
 const FAQS: FaqItem[] = [
   {
-    q: "What is Engage?",
-    a: "Engage is a quoting and order platform for the benchtop industry, built by Nyro. Fabricators use it to give their trade customers self-serve quoting with live pricing, to run their own quoting and production, and - through the Retailer Platform - to receive orders quoted in retail stores.",
+    q: "What is Nyro?",
+    a: "Nyro is a quoting and order platform for the benchtop industry. Fabricators use it to give their trade customers self-serve quoting with live pricing, to run their own quoting and production, and - through the Retailer Platform - to receive orders quoted in retail stores.",
   },
   {
     q: "Who is the Customer Portal for?",
     a: "Fabricators who want to stop being the bottleneck on quotes. Your trade customers - kitchen companies, joiners, builders - draw benchtops against your catalog and see live prices at the tier you set for their account. You review what comes in and export DXF/CNC files into your existing production system.",
   },
   {
-    q: "Do I have to replace my existing production system to use Engage?",
-    a: "No. The Customer Portal runs in front of whatever you use today: quotes come in, you approve them, and you export DXF and CNC-ready files into your current workflow. The full Fabrication Platform is there when you want to run production, stock and dispatch on Engage too - and upgrading is a module switch, not a migration.",
+    q: "Do I have to replace my existing production system to use Nyro?",
+    a: "No. The Customer Portal runs in front of whatever you use today: quotes come in, you approve them, and you export DXF and CNC-ready files into your current workflow. The full Fabrication Platform is there when you want to run production, stock and dispatch on Nyro too - and upgrading is a module switch, not a migration.",
   },
   {
     q: "How does pricing work?",
@@ -118,7 +118,7 @@ export default function HomePage() {
               Built inside a working fabrication business.
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-              Engage was developed with BeautyCraft, the platform&apos;s
+              Nyro was developed with BeautyCraft, the platform&apos;s
               founding fabricator. The workflows exist because a real factory
               needed them.
             </p>
@@ -139,7 +139,7 @@ export default function HomePage() {
       <Section surface="card">
         <Faq
           items={FAQS}
-          sub="Everything about the three Engage products and how they fit together."
+          sub="Everything about the three Nyro products and how they fit together."
         />
       </Section>
 

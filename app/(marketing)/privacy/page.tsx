@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/table";
 
 /* Marketing-site privacy notice. Deliberately scoped to THIS site
-   (engage.online): the logged-in platform at app.engage.online is governed by
+   (gonyro.com): the logged-in platform at app.gonyro.com is governed by
    each customer's subscription agreement and the platform's own notices.
    Conflating them would misstate both.
 
@@ -26,7 +26,7 @@ const { legal } = siteConfig;
 export const metadata = buildMetadata({
   title: "Privacy Policy",
   description:
-    "How Nyro collects and uses personal information on engage.online - cookies, analytics, contact enquiries, your rights under the NZ Privacy Act 2020, and how to reach us.",
+    "How Nyro collects and uses personal information on gonyro.com - cookies, analytics, contact enquiries, your rights under the NZ Privacy Act 2020, and how to reach us.",
   path: "/privacy",
 });
 
@@ -92,9 +92,9 @@ export default function PrivacyPage() {
           <p data-speakable>
             This notice covers the {siteConfig.name} marketing website at{" "}
             {siteConfig.url.replace("https://", "")}, operated by {legal.entity}
-            , a New Zealand company. The Engage platform itself (at
-            app.engage.online and tenant subdomains) is governed by each
-            customer&apos;s subscription agreement - if you use Engage through
+            , a New Zealand company. The Nyro platform itself (at
+            app.gonyro.com and tenant subdomains) is governed by each
+            customer&apos;s subscription agreement - if you use Nyro through
             your employer or supplier, they control that data and this notice
             doesn&apos;t change it.
           </p>

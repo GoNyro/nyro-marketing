@@ -6,7 +6,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 ## What this site is
 
-The marketing site for **Engage** (by **Nyro**) — the quoting and order
+The marketing site for **Nyro** — the quoting and order
 platform for benchtop fabricators. Three products, one platform:
 
 - `/customer` — Customer Portal: self-serve quoting for a fabricator's trade customers (first to market).
@@ -34,7 +34,7 @@ founding fabricator and the only named tenant.
 - `scripts/generate-icons.mjs` — regenerates favicons/PWA icons from `app/icon.svg`.
 - `mdx-components.tsx` — global MDX component overrides.
 
-## Design system (DOSS register, Engage-tinted)
+## Design system (DOSS register, Nyro-tinted)
 
 Reference: doss.com's professionalism - near-black ink sections, warm-gray
 light sections, one sparing accent, realistic product-UI mockups.

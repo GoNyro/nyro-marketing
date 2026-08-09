@@ -26,7 +26,7 @@ const MENU_INTRO: Record<string, { label: string; title: string }> = {
   },
   Company: {
     label: "Company",
-    title: "Built by Nyro, proven on a real factory floor",
+    title: "Proven on a real factory floor",
   },
 };
 

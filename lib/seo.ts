@@ -15,8 +15,8 @@ const OG_VERSION = "2";
 
 type BuildMetadataInput = {
   title?: string;
-  // Exact <title> text, bypassing the root layout's "%s - Engage" template.
-  // Used by the homepage for a brand-first title (e.g. "Engage - Benchtop quoting
+  // Exact <title> text, bypassing the root layout's "%s - Nyro" template.
+  // Used by the homepage for a brand-first title (e.g. "Nyro - Benchtop quoting
   // Intelligence"); interior pages should use `title` and let the template
   // append the brand.
   titleAbsolute?: string;
@@ -46,7 +46,7 @@ export function buildMetadata({
 }: BuildMetadataInput = {}): Metadata {
   const url = new URL(path, siteConfig.url).toString();
   // OG/Twitter card title - the bare page title (brand for the default). No
-  // brand suffix here; the "- Engage" suffix lives only in the <title> tag,
+  // brand suffix here; the "- Nyro" suffix lives only in the <title> tag,
   // added once by the root layout's title template.
   const resolvedTitle = title ?? siteConfig.name;
   // Per-route OG card: when using the default generator, bake the page's title
@@ -59,7 +59,7 @@ export function buildMetadata({
 
   return {
     // <title> tag. Interior pages pass `title`; the root layout's
-    // `%s - Engage` template appends the brand once (page-first). The homepage
+    // `%s - Nyro` template appends the brand once (page-first). The homepage
     // passes `titleAbsolute` for a brand-first title that skips the template.
     title: titleAbsolute ? { absolute: titleAbsolute } : title,
     description,

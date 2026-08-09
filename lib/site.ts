@@ -1,31 +1,26 @@
 export const siteConfig = {
-  name: "Engage",
-  shortName: "Engage",
+  name: "Nyro",
+  shortName: "Nyro",
   // Canonical marketing URL. The apex serves marketing; the platform app sits
   // on the app. subdomain and each tenant gets its own subdomain
-  // (beautycraft.engage.online). Overridable via env. Trailing slash stripped
+  // (beautycraft.gonyro.com). Overridable via env. Trailing slash stripped
   // at the source so every consumer (schema @id builders, OG URLs, sitemap)
   // concatenates against a clean origin.
-  url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://engage.online").replace(
+  url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://gonyro.com").replace(
     /\/$/,
     "",
   ),
   // Product app (login / signup) destination.
-  appUrl: "https://app.engage.online",
+  appUrl: "https://app.gonyro.com",
   // Primary CTA destination ("Book a demo"). Env-overridable so the rep or a
   // round-robin/team link can change without a code change.
   bookingUrl:
     process.env.NEXT_PUBLIC_BOOKING_URL ?? "mailto:hello@gonyro.com",
   description:
-    "Engage is the quoting and order platform for benchtop fabricators. Give your trade customers self-serve quoting with live pricing, run your fabrication lifecycle end to end, and open a retail channel — all on one platform.",
+    "Nyro is the quoting and order platform for benchtop fabricators. Give your trade customers self-serve quoting with live pricing, run your fabrication lifecycle end to end, and open a retail channel — all on one platform.",
   locale: "en-NZ",
   defaultOgImage: "/api/og",
   contactEmail: "hello@gonyro.com",
-  // Parent company. Engage is built by Nyro.
-  company: {
-    name: "Nyro",
-    url: "https://gonyro.com",
-  },
   legal: {
     entity: "Nyro",
     address: ["Auckland", "New Zealand"],

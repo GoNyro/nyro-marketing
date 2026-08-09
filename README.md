@@ -1,6 +1,6 @@
 # nyro-marketing
 
-Marketing site for Engage (by Nyro) — the quoting and order platform for
+Marketing site for Nyro — the quoting and order platform for
 benchtop fabricators. Next.js 16 (App Router) · TypeScript · Tailwind v4 ·
 shadcn/ui · MDX.
 
@@ -30,7 +30,7 @@ pnpm typecheck  # tsc --noEmit
 ## Environment
 
 - `NEXT_PUBLIC_SITE_URL` — canonical marketing origin. Defaults to
-  `https://engage.online`. Set on the host.
+  `https://gonyro.com`. Set on the host.
 - `NEXT_PUBLIC_GA_ID` — GA4 measurement ID (production scope only).
 - `NEXT_PUBLIC_HUBSPOT_PORTAL_ID` — HubSpot tracking + cookie banner.
 - `NEXT_PUBLIC_BOOKING_URL` — overrides the primary CTA destination
@@ -41,9 +41,9 @@ dev and previews.
 
 ## Domains
 
-The apex `engage.online` serves this marketing site. The platform app sits on
-`app.engage.online`, and each tenant gets its own subdomain
-(e.g. `beautycraft.engage.online`).
+The apex `gonyro.com` serves this marketing site. The platform app sits on
+`app.gonyro.com`, and each tenant gets its own subdomain
+(e.g. `beautycraft.gonyro.com`).
 
 ## Brand assets
 

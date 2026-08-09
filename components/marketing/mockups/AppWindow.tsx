@@ -28,7 +28,7 @@ export function AppWindow({
         <div className="flex items-center gap-2.5">
           <LogoGlyph className="size-4" />
           <span className="text-[13px] font-semibold tracking-tight">
-            engage
+            nyro
           </span>
           <span className="ml-2 hidden rounded-md bg-stage px-2 py-0.5 text-[11px] font-medium text-foreground/60 sm:inline">
             {tenant}

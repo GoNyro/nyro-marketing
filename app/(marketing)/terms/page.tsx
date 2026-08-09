@@ -6,7 +6,7 @@ import { breadcrumbSchema } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 
-/* Terms for THIS marketing site only. Use of the Engage platform is governed
+/* Terms for THIS marketing site only. Use of the Nyro platform is governed
    by each customer's subscription agreement - these terms deliberately do not
    reach into the product. */
 
@@ -15,7 +15,7 @@ const { legal } = siteConfig;
 export const metadata = buildMetadata({
   title: "Terms of Use",
   description:
-    "The terms that govern use of the engage.online marketing website, operated by Nyro.",
+    "The terms that govern use of the gonyro.com marketing website, operated by Nyro.",
   path: "/terms",
 });
 
@@ -48,7 +48,7 @@ export default function TermsPage() {
             These terms govern your use of the {siteConfig.name} marketing
             website at {siteConfig.url.replace("https://", "")}, operated by{" "}
             {legal.entity} (&quot;we&quot;, &quot;us&quot;). By using the site
-            you accept them. Use of the Engage platform itself is governed by
+            you accept them. Use of the Nyro platform itself is governed by
             the subscription agreement between {legal.entity} and the customer
             organisation - not by these terms.
           </p>
@@ -56,7 +56,7 @@ export default function TermsPage() {
           <h2>Use of the site</h2>
           <p>
             You may browse the site and share its content for evaluating
-            Engage. Don&apos;t misuse it: no attempting to break, probe or
+            Nyro. Don&apos;t misuse it: no attempting to break, probe or
             overload it, no scraping at volumes that affect others, and no
             passing our content off as your own.
           </p>
@@ -72,7 +72,7 @@ export default function TermsPage() {
 
           <h2>Intellectual property</h2>
           <p>
-            The site, the Engage name, the wordmark and all site content belong
+            The site, the Nyro name, the wordmark and all site content belong
             to {legal.entity} or its licensors. Third-party names mentioned on
             the site belong to their owners and are used for identification
             only.

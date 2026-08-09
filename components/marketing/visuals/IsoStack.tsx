@@ -94,7 +94,7 @@ export function IsoStack({ className }: { className?: string }) {
     <svg
       viewBox="0 0 600 560"
       role="img"
-      aria-label="The Engage platform drawn as an isometric stack: customer portal, fabrication and retail layers on one shared core"
+      aria-label="The Nyro platform drawn as an isometric stack: customer portal, fabrication and retail layers on one shared core"
       className={cn("w-full", className)}
     >
       {/* axis */}
