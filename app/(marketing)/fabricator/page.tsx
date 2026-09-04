@@ -16,7 +16,6 @@ import { Section } from "@/components/marketing/primitives/Section";
 import { BookCta } from "@/components/marketing/primitives/BookCta";
 import { FeatureRows, type FeatureRow } from "@/components/marketing/sections/FeatureRows";
 import { SlimCta } from "@/components/marketing/sections/SlimCta";
-import { PlaceholderSlab } from "@/components/marketing/sections/PlaceholderSlab";
 import {
   Faq,
   faqItemsToSchema,
@@ -229,24 +228,8 @@ export default function FabricatorPage() {
         label="Talk to us"
       />
 
-      {/* Production screens get their own design session. */}
-      <section className="surface-gray border-t border-border">
-        <Container className="py-20 md:py-24">
-          <div className="mx-auto max-w-xl text-center">
-            <h2 className="display-md text-balance">
-              From queue to cut list.
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-              The production queue, floor tablet and dispatch screens, walked
-              through end to end in the demo.
-            </p>
-          </div>
-          <PlaceholderSlab
-            note="Production & floor-tablet screens · mockups — dedicated session"
-            className="mt-12"
-          />
-        </Container>
-      </section>
+      {/* Production queue and floor-tablet screens return here once the
+          platform has them to replicate. Until then the section is hidden. */}
 
       {/* FAQ */}
       <Section surface="card">
