@@ -3,7 +3,7 @@ export const siteConfig = {
   shortName: "Nyro",
   // Canonical marketing URL. The apex serves marketing; the platform app sits
   // on the app. subdomain and each tenant gets its own subdomain
-  // (beautycraft.gonyro.com). Overridable via env. Trailing slash stripped
+  // (acmestone.gonyro.com). Overridable via env. Trailing slash stripped
   // at the source so every consumer (schema @id builders, OG URLs, sitemap)
   // concatenates against a clean origin.
   url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://gonyro.com").replace(
@@ -17,7 +17,7 @@ export const siteConfig = {
   bookingUrl:
     process.env.NEXT_PUBLIC_BOOKING_URL ?? "mailto:hello@gonyro.com",
   description:
-    "Nyro is the quoting and order platform for benchtop fabricators. Give your trade customers self-serve quoting with live pricing, run your fabrication lifecycle end to end, and open a retail channel — all on one platform.",
+    "Nyro is the platform for quoting, making and selling benchtops. Fabricators give their customers a portal to quote themselves, run the whole job from quote to delivery, and take orders from retailers who quote in store.",
   locale: "en-NZ",
   defaultOgImage: "/api/og",
   contactEmail: "hello@gonyro.com",
@@ -61,9 +61,9 @@ export type SiteConfig = typeof siteConfig;
 export type FooterGroup = (typeof siteConfig.footerNav)[number];
 export type FooterLink = FooterGroup["links"][number];
 
-// Primary nav - the three products in go-to-market order (Customer Portal
-// ships first, Fabrication accretes, Retailer rides the network), then
-// Pricing and Company.
+// Primary nav - the three products in the order a buyer meets them (portal
+// first, the full platform behind it, retail on top), then Pricing and
+// Company.
 export type NavLink = { label: string; href: string; description?: string };
 export type NavGroup = { heading: string; links: NavLink[] };
 export type NavEntry =
@@ -80,12 +80,12 @@ export const NAV: NavEntry[] = [
           {
             label: "Customer Portal",
             href: "/customer",
-            description: "Self-serve quoting for your trade customers",
+            description: "Your customers quote themselves, on your terms",
           },
           {
             label: "Fabrication Platform",
             href: "/fabricator",
-            description: "Quoting to production to delivery, end to end",
+            description: "Run the whole job, from quote to delivery",
           },
         ],
       },
@@ -95,12 +95,12 @@ export const NAV: NavEntry[] = [
           {
             label: "Retailer Platform",
             href: "/retailer",
-            description: "One quoting surface across every fabricator",
+            description: "Quote in store, into any fabricator on Nyro",
           },
         ],
       },
     ],
-    footerLink: { label: "How the three fit together →", href: "/#platform" },
+    footerLink: { label: "Which product is right for you? →", href: "/#products" },
   },
   { label: "Pricing", href: "/pricing" },
   {

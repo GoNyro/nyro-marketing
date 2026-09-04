@@ -17,7 +17,7 @@ import { cn } from "@/lib/utils";
 export const metadata = buildMetadata({
   title: "Pricing",
   description:
-    "Nyro pricing follows the product path: start with the Customer Portal, switch on the full Fabrication Platform when you're ready, partner with us on the Retailer Platform. Scoped to your operation - talk to us for a quote.",
+    "Nyro is priced per product and scoped to your operation. Start with the Customer Portal, move up to the Fabrication Platform when you want the factory on Nyro, or join as a retailer. Book a demo for a number.",
   path: "/pricing",
 });
 
@@ -35,15 +35,15 @@ const PLANS: Plan[] = [
   {
     name: "Customer Portal",
     href: "/customer",
-    who: "Fabricators who want quoting off their desk first",
+    who: "Fabricators who want quoting off their desk",
     blurb:
-      "Self-serve quoting for your trade customers on your catalog and pricing, with orders and DXF/CNC export into your existing production setup.",
+      "Your customers quote themselves on your catalog and your prices. Approved jobs hand over to the production system you already run.",
     includes: [
-      "Catalog, scoped per customer account",
-      "Quote canvas with live tier pricing",
-      "Approvals, magic links & order tracking",
-      "DXF / CNC-ready export",
-      "Onboarding of your catalog & pricing rules",
+      "Catalog and price levels, set per customer",
+      "Control over what each customer can draw",
+      "Approvals, order tracking and delivery pricing",
+      "Machine-ready files for your production system",
+      "We load your catalog and pricing with you",
     ],
     cta: "Book a demo",
     highlight: true,
@@ -51,51 +51,51 @@ const PLANS: Plan[] = [
   {
     name: "Fabrication Platform",
     href: "/fabricator",
-    who: "Fabricators ready to run the lifecycle on one system",
+    who: "Fabricators who want the whole job on one system",
     blurb:
-      "Everything in the Customer Portal plus staff quoting, production scheduling, floor tablets, stock, dispatch, financials integration and analytics.",
+      "Everything in the Customer Portal plus the factory: production queue, programs for your machines, floor tablets, stock, delivery and invoicing.",
     includes: [
-      "Everything in Customer Portal",
-      "Production queue & scheduling",
-      "Floor tablets per workstation",
-      "Stock, dispatch & financials sync",
-      "Analytics on margin and lead time",
+      "Everything in the Customer Portal",
+      "Production queue and scheduling",
+      "Programs for your CNC machines",
+      "Floor tablets, stock and delivery runs",
+      "Invoicing to your accounting system and reporting",
     ],
     cta: "Talk to us",
   },
   {
     name: "Retailer Platform",
     href: "/retailer",
-    who: "Retail chains selling benchtops in-store",
+    who: "Retailers who sell benchtops in store",
     blurb:
-      "In-store quoting across your partner fabricators' live catalogs, your markup and branding on top, orders routed for fulfilment. Rolled out as a partnership.",
+      "Quote in store into any fabricator on Nyro, with your margin on top and your brand on everything the customer sees.",
     includes: [
-      "Quoting against live fabricator catalogs",
-      "Wholesale tiers & your retail markup",
-      "Branded homeowner approvals",
-      "Order routing to fabricators",
-      "Market analytics for category buyers",
+      "Quote into any fabricator on Nyro",
+      "Your margin, across the board or per item",
+      "Your logo and colours on every customer touchpoint",
+      "Customer approvals and tracking with a link, no login",
+      "Sales and fabricator reporting",
     ],
-    cta: "Register interest",
+    cta: "Talk to us",
   },
 ];
 
 const FAQS: FaqItem[] = [
   {
     q: "Why isn't there a price on this page?",
-    a: "Because the honest answer is \"it depends on your operation\": how many customer accounts you invite, which modules are on, and what onboarding your catalog needs. We scope it with you in the first call and give you a number before any commitment.",
+    a: "Because the honest answer is \"it depends on your operation\": how many customer accounts you invite, which product you're on, and how much help your catalog needs to load. We scope it with you in the first call and give you a number before any commitment.",
   },
   {
     q: "What does onboarding involve?",
-    a: "Your catalog and your pricing rules. We load materials, thicknesses, edge profiles and machining rates with you, set up customer tiers, and go live with a small set of trade accounts before widening access.",
+    a: "Your catalog and your pricing. We load materials, thicknesses, edge profiles and machining rates with you, set up your customer price levels, and go live with a few customers before opening it up to everyone.",
   },
   {
-    q: "What happens to our pricing when we upgrade tiers?",
-    a: "Upgrading from Customer Portal to the full Fabrication Platform is a module switch on the same tenant - your data, catalog and customers stay put, and the subscription changes to match the modules you turn on.",
+    q: "What happens to our subscription when we move from the Customer Portal to the Fabrication Platform?",
+    a: "We switch on the factory on the account you already have. Your catalog, customers and history stay put, and the subscription changes to match what you've switched on.",
   },
   {
     q: "Is there a contract lock-in?",
-    a: "We'd rather keep you with a product you use than a clause you signed. Terms are agreed per engagement - ask us in the demo.",
+    a: "We'd rather keep you with a product you use than a clause you signed. Terms are agreed per engagement. Ask us in the demo.",
   },
 ];
 
@@ -116,12 +116,12 @@ export default function PricingPage() {
             Pricing
           </p>
           <h1 className="display-hero mt-5 max-w-2xl text-balance">
-            Pay for the surface you use.
+            Pay for the product you use.
           </h1>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">
-            Nyro is priced to follow the product path: start where the pain
-            is, switch on more when you&apos;re ready. Every engagement is
-            scoped to your operation - no per-seat games.
+            Start where the pain is and switch on more when you&apos;re ready.
+            Every engagement is scoped to your operation, and you get a clear
+            number before you commit.
           </p>
         </Container>
       </section>
@@ -141,7 +141,7 @@ export default function PricingPage() {
               >
                 {plan.highlight ? (
                   <p className="label-mono mb-3 text-[0.65rem] text-accent">
-                    First to market · start here
+                    Most fabricators start here
                   </p>
                 ) : null}
                 <h2 className="font-display text-2xl text-foreground">
@@ -180,9 +180,9 @@ export default function PricingPage() {
           </div>
 
           <p className="mt-14 max-w-xl text-sm text-muted-foreground">
-            Every plan includes onboarding, support and the shared platform
-            underneath - one login, one database, no data migrations between
-            tiers.
+            Every plan includes onboarding and support. Moving from the
+            Customer Portal to the Fabrication Platform happens on the account
+            you already have, with nothing to migrate.
           </p>
         </Container>
       </section>
@@ -192,8 +192,8 @@ export default function PricingPage() {
       </Section>
 
       <SlimCta
-        title="Get a number scoped to your factory."
-        sub="Thirty minutes, your materials, your quoting volume - a clear price with nothing generic about it."
+        title="Get a number scoped to your business."
+        sub="Thirty minutes, your materials, your quoting volume. A clear price with nothing generic about it."
       />
     </>
   );

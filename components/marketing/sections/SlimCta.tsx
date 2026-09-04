@@ -7,8 +7,8 @@ import { cn } from "@/lib/utils";
  * Quiet, repeated - the DOSS cadence, not a billboard.
  */
 export function SlimCta({
-  title = "Put quoting in their hands.",
-  sub = "Fast to set up. Priced from your rules. Built for the trade.",
+  title = "See it on your own materials.",
+  sub = "A thirty-minute walkthrough on your catalog and your prices. No prep needed.",
   label = "Book a demo",
   className,
 }: {

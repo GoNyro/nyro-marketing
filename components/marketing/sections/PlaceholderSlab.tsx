@@ -11,7 +11,7 @@ export function PlaceholderSlab({
   ratio = "aspect-[21/9]",
   className,
 }: {
-  /** What belongs here, e.g. "Customer film · BeautyCraft factory floor". */
+  /** What belongs here, e.g. "Customer film · case-study factory floor". */
   note: string;
   ratio?: string;
   className?: string;

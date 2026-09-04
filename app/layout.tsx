@@ -1,5 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo, IBM_Plex_Mono, Instrument_Sans } from "next/font/google";
+import {
+  Archivo,
+  DM_Sans,
+  IBM_Plex_Mono,
+  Instrument_Sans,
+} from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -11,6 +16,15 @@ import { siteConfig } from "@/lib/site";
 const instrumentSans = Instrument_Sans({
   variable: "--font-instrument-sans",
   subsets: ["latin"],
+  display: "swap",
+});
+
+// The product's UI face - loaded for the app mockups only, so they set in the
+// same type as the shipping builder rather than an approximation of it.
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 
@@ -89,7 +103,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${instrumentSans.variable} ${plexMono.variable} ${archivo.variable} h-full antialiased`}
+      className={`${instrumentSans.variable} ${dmSans.variable} ${plexMono.variable} ${archivo.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">

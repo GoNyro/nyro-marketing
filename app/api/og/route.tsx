@@ -1,4 +1,10 @@
 import { ImageResponse } from "next/og";
+import {
+  DIMENSION,
+  WORDMARK,
+  WORDMARK_PATH,
+  WORDMARK_VIEWBOX,
+} from "@/lib/brand";
 
 export const runtime = "edge";
 export const contentType = "image/png";
@@ -24,17 +30,18 @@ const INK = "#20241f";
 const STONE = "#f4f3ec";
 const MUTED = "rgba(244,243,236,0.62)";
 const FAINT = "rgba(244,243,236,0.42)";
-const OLIVE = "#6f8747";
+// Rendered height of the lockup; width follows the viewBox ratio.
+const WORDMARK_HEIGHT = 56;
 
 const PRODUCTS = ["Customer Portal", "Fabrication Platform", "Retailer Platform"];
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const title =
-    searchParams.get("title") ?? "Benchtop quoting, priced as they draw";
+    searchParams.get("title") ?? "Quote, make and sell benchtops on one platform";
   const subtitle =
     searchParams.get("subtitle") ??
-    "Self-serve quoting for your trade customers, a full fabrication platform behind it.";
+    "Your customers quote themselves. Your factory runs on the same job. Retailers quote in store.";
 
   const [archivo, instrument] = await assets;
 
@@ -72,30 +79,27 @@ export async function GET(request: Request) {
           }}
         />
 
-        {/* Lockup: L-shaped benchtop glyph + wordmark. */}
-        <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-          <svg width="52" height="52" viewBox="0 0 24 24" fill="none">
+        {/* Lockup: the measured wordmark. Satori has no non-scaling-stroke,
+            so the measurer's widths are fixed in font units here. */}
+        <div style={{ display: "flex" }}>
+          <svg
+            width={WORDMARK_HEIGHT * (1989 / 1040)}
+            height={WORDMARK_HEIGHT}
+            viewBox={WORDMARK_VIEWBOX}
+            fill="none"
+          >
+            <path d={WORDMARK_PATH} fill={STONE} />
             <path
-              d="M4 5.5 a1.5 1.5 0 0 1 1.5 -1.5 h8 a1.5 1.5 0 0 1 1.5 1.5 v6 a1 1 0 0 0 1 1 h2.5 a1.5 1.5 0 0 1 1.5 1.5 v4.5 a1.5 1.5 0 0 1 -1.5 1.5 h-13 a1.5 1.5 0 0 1 -1.5 -1.5 z"
-              fill={OLIVE}
+              d={`M0 ${-WORDMARK.xHeight - DIMENSION.gap}V${DIMENSION.y - DIMENSION.overshoot}M${WORDMARK.width} ${-WORDMARK.xHeight - DIMENSION.gap}V${DIMENSION.y - DIMENSION.overshoot}M0 ${DIMENSION.y}H${WORDMARK.width}`}
+              stroke={FAINT}
+              strokeWidth="22"
             />
             <path
-              d="M4 1.75 v2.5 M15 1.75 v2.5 M4 3 h11"
-              stroke="rgba(244,243,236,0.4)"
-              strokeWidth="1"
-              strokeLinecap="round"
+              d={`M${-DIMENSION.tick} ${DIMENSION.y + DIMENSION.tick}L${DIMENSION.tick} ${DIMENSION.y - DIMENSION.tick}M${WORDMARK.width - DIMENSION.tick} ${DIMENSION.y + DIMENSION.tick}L${WORDMARK.width + DIMENSION.tick} ${DIMENSION.y - DIMENSION.tick}`}
+              stroke={FAINT}
+              strokeWidth="34"
             />
           </svg>
-          <div
-            style={{
-              display: "flex",
-              fontFamily: "Archivo",
-              fontSize: 46,
-              letterSpacing: "-0.03em",
-            }}
-          >
-            nyro
-          </div>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>

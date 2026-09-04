@@ -1,8 +1,10 @@
 import {
   Boxes,
+  Cpu,
   Factory,
   LineChart,
   TabletSmartphone,
+  Truck,
 } from "lucide-react";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema, faqPageSchema } from "@/lib/schema";
@@ -22,9 +24,9 @@ import {
 } from "@/components/marketing/sections/Faq";
 
 export const metadata = buildMetadata({
-  title: "Fabrication Platform - quoting to delivery on one system",
+  title: "Fabrication Platform - run the whole job on Nyro",
   description:
-    "The full operating system for a benchtop fabricator: staff and customer quoting, orders, production scheduling, floor tablets, CAM export, stock, dispatch, financials integration and analytics - one system from enquiry to installed top.",
+    "Everything a benchtop fabricator needs in one place: staff and customer quoting, orders, production scheduling, programs for your CNC machines, floor tablets, stock, delivery and invoicing. One job record from enquiry to installed top.",
   path: "/fabricator",
 });
 
@@ -35,85 +37,105 @@ const LIFECYCLE = [
     step: "01",
     title: "Quote",
     blurb:
-      "Staff quote on the same canvas your customers use in the portal. One engine, one price, whoever draws it.",
+      "Staff quote on the same drawing tools your customers use in the portal. Same catalog, same pricing, whoever draws it.",
   },
   {
     step: "02",
     title: "Order",
     blurb:
-      "Approval converts the quote - geometry, pricing and paper trail intact. Nothing is re-entered.",
+      "Approval turns the quote into an order with the drawing, the price and the paper trail intact. Nothing is re-entered.",
   },
   {
     step: "03",
-    title: "Produce",
+    title: "Make",
     blurb:
-      "Jobs land in the manufacturing queue with capacity in view. Floor staff work from tablets at each station.",
+      "Jobs land in the production queue. Your CNC machines cut from the approved drawing and floor staff work from tablets at each station.",
   },
   {
     step: "04",
-    title: "Dispatch",
+    title: "Deliver",
     blurb:
-      "Ready tops roll into delivery runs, customers notified at each step, stock decremented as material is consumed.",
+      "Finished tops go into delivery runs by zone. Customers are told at each step, and proof of delivery is kept on the job.",
   },
   {
     step: "05",
-    title: "Prove",
+    title: "Invoice",
     blurb:
-      "Financials flow to your accounting system; analytics show where margin is made and lost.",
+      "Invoices go to your accounting system without being keyed twice. Reports show where margin is made and lost.",
   },
 ] as const;
 
 const MODULE_ROWS: FeatureRow[] = [
   {
     icon: Factory,
-    title: "Production\n& scheduling",
-    lead: "A manufacturing queue that understands capacity.",
+    title: "Production queue\n& scheduling",
+    lead: "A queue that knows what the factory can take on.",
     body: [
-      "See what's committed, what's at risk, and what the factory can actually take on this week. Jobs carry their full history - the quote's geometry is the piece the floor cuts.",
+      "See what's committed, what's at risk and what you can promise this week. Reorder by drag, batch by material, and plan around holidays and shutdowns. Every job carries its full history from the quote onward.",
+    ],
+  },
+  {
+    icon: Cpu,
+    title: "Programs for\nyour machines",
+    lead: "The approved drawing becomes the machine program.",
+    body: [
+      "Nyro writes the programs for your CNC machines directly from the drawing the customer approved, and lays pieces out on each sheet to get the most from every slab, offcuts included. Biesse, SCM, MasterWood, WoodWop, Anderson and FMC controllers are supported.",
     ],
   },
   {
     icon: TabletSmartphone,
-    title: "Floor tablets\nper workstation",
+    title: "Floor tablets\nat every station",
     lead: "Job status is real, not remembered.",
     body: [
-      "Operators see the piece, the drawing and the operation at each station - cut, edge, polish, pack - and mark work done as it happens. That's what keeps order status honest for customers and staff alike.",
+      "Operators see the piece, the drawing and the operation at each station: cut, edge, polish, pack. They mark work done as it happens, which is what keeps order status honest for the office and the customer.",
     ],
   },
   {
     icon: Boxes,
-    title: "Stock, dispatch\n& CAM export",
-    lead: "Slabs, offcuts and delivery runs on the same record.",
+    title: "Stock &\nmaterials",
+    lead: "Every slab and offcut, tracked against a job.",
     body: [
-      "Materials tracked against jobs with CAM and nesting export to make the most of every sheet. Ready tops roll into delivery runs with the last mile handled like the first - notified, tracked, signed off.",
+      "Material is reserved when an order is confirmed, stock levels update as it's used, and usable offcuts are kept for the next job that fits. Low stock raises a reorder and a purchase order to your supplier.",
+    ],
+  },
+  {
+    icon: Truck,
+    title: "Delivery\n& dispatch",
+    lead: "The last mile handled like the first.",
+    body: [
+      "Delivery zones and rates price into the quote. Finished tops go into runs, customers are notified when it's on the way, and the driver records proof of delivery against the order.",
     ],
   },
   {
     icon: LineChart,
-    title: "Financials\n& analytics",
+    title: "Invoicing\n& reporting",
     lead: "The numbers a fabricator actually argues about.",
     body: [
-      "Invoicing syncs to your accounting system so the office doesn't key it twice. Reporting covers margin, rework and lead time - by material, by customer, by job type.",
+      "Invoices go to your accounting system so the office doesn't key them twice, and payments come back so orders show as paid. Reports cover margin, remakes and lead time, by material, by customer and by job type.",
     ],
   },
 ];
 
 const FAQS: FaqItem[] = [
   {
-    q: "We're on the Customer Portal - what does upgrading involve?",
-    a: "A module switch. You're already the same tenant on the same platform, so your catalog, customers, quotes and orders carry straight over. We turn on production, stock, dispatch and analytics, and train your team on the new screens.",
+    q: "We're on the Customer Portal. What does moving up involve?",
+    a: "We switch on production, stock, delivery and invoicing on the account you already have. Your catalog, customers, quotes and orders stay exactly where they are. Then we train your team on the new screens.",
   },
   {
-    q: "Can we buy the Fabrication Platform directly, without starting on the portal?",
-    a: "Yes. The staged path exists for fabricators who want low commitment first, but there's nothing stopping a direct start on the full platform.",
+    q: "Can we start on the Fabrication Platform without using the Customer Portal first?",
+    a: "Yes. Plenty of fabricators want the whole job on one system from day one. The Customer Portal is included, so your customers can quote themselves from the start.",
   },
   {
-    q: "Does it integrate with our accounting system?",
-    a: "Financials integration is part of the platform - invoices and payments sync out so the office doesn't key them twice. Talk to us about your specific stack in the demo.",
+    q: "Which CNC machines does it work with?",
+    a: "Nyro writes programs for Biesse, SCM, MasterWood, WoodWop, Anderson and FMC controllers. If you run something else, tell us in the demo.",
+  },
+  {
+    q: "Does it connect to our accounting system?",
+    a: "Yes. Invoices and customers go to your accounting system and payment status comes back, so nobody keys an invoice twice. Tell us what you use in the demo.",
   },
   {
     q: "What happens on the factory floor?",
-    a: "Each workstation gets a tablet view of its queue. Operators see the piece, the drawing and the operation, and mark work done as it happens - which is what keeps order status honest for customers and staff alike.",
+    a: "Each station gets a tablet view of its queue. Operators see the piece, the drawing and the operation, and mark work done as it happens. That's what keeps order status honest for customers and staff alike.",
   },
 ];
 
@@ -129,22 +151,22 @@ export default function FabricatorPage() {
       <JsonLd data={faqPageSchema(faqItemsToSchema(FAQS))} />
 
       {/* Dark hero with the lifecycle rail */}
-      <section className="surface-dark ink-grid relative overflow-hidden">
+      <section className="surface-dark ink-dots relative overflow-hidden">
         <Container className="relative pb-16 pt-16 md:pb-20 md:pt-20">
           <p className="label-mono text-[0.7rem] text-surface-dark-foreground/50">
             Fabrication Platform · for fabricators
           </p>
           <h1 className="display-hero mt-5 max-w-2xl text-balance text-surface-dark-foreground">
-            One system from enquiry to installed top
+            Run the whole job on one system
           </h1>
           <p
             data-speakable
             className="mt-5 max-w-xl text-base leading-relaxed text-surface-dark-foreground/65"
           >
-            The full operating system for a benchtop fabricator. Quoting,
-            orders, production, stock, dispatch and the numbers - on one
-            platform, so a job is entered once and everyone from the front
-            office to the polisher works from the same truth.
+            Everything in the Customer Portal, plus the factory. Quoting,
+            orders, production, your CNC machines, stock, delivery and
+            invoicing on one platform, so a job is entered once and everyone
+            from the front office to the polisher works from the same drawing.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <BookCta variant="inverse" />
@@ -192,13 +214,18 @@ export default function FabricatorPage() {
           <h2 className="display-md max-w-2xl text-balance">
             Everything the office and the floor argue about, handled.
           </h2>
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">
+            The Fabrication Platform takes the job from the approved quote
+            through your machines and out the door. No other production
+            software required.
+          </p>
           <FeatureRows rows={MODULE_ROWS} className="mt-16" />
         </Container>
       </section>
 
       <SlimCta
-        title="Already on the portal?"
-        sub="Upgrading is a module switch on the same tenant - your data stays put."
+        title="Already on the Customer Portal?"
+        sub="We switch on the factory on the account you already have. Nothing moves."
         label="Talk to us"
       />
 
@@ -210,7 +237,7 @@ export default function FabricatorPage() {
               From queue to cut list.
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-              The production queue, floor tablet and dispatch screens - walked
+              The production queue, floor tablet and dispatch screens, walked
               through end to end in the demo.
             </p>
           </div>
@@ -225,13 +252,13 @@ export default function FabricatorPage() {
       <Section surface="card">
         <Faq
           items={FAQS}
-          sub="What owners and ops managers ask about running the factory on Nyro."
+          sub="What owners and production managers ask about running the factory on Nyro."
         />
       </Section>
 
       <SlimCta
         title="See a job go from sketch to cut list."
-        sub="Quote, order, production queue, floor tablet, dispatch - on a sample factory."
+        sub="Quote, order, production queue, floor tablet, delivery, on a sample factory."
       />
     </>
   );

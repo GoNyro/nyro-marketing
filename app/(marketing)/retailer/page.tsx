@@ -1,4 +1,14 @@
-import { Check, Eye, Minus } from "lucide-react";
+import {
+  ChartBar,
+  Check,
+  Eye,
+  Minus,
+  Palette,
+  Percent,
+  Store,
+  Truck,
+  Users,
+} from "lucide-react";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema, faqPageSchema } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
@@ -6,6 +16,7 @@ import { Container } from "@/components/marketing/Container";
 import { Section } from "@/components/marketing/primitives/Section";
 import { BookCta } from "@/components/marketing/primitives/BookCta";
 import { Reveal } from "@/components/marketing/primitives/Reveal";
+import { FeatureRows, type FeatureRow } from "@/components/marketing/sections/FeatureRows";
 import { SlimCta } from "@/components/marketing/sections/SlimCta";
 import {
   Faq,
@@ -22,9 +33,9 @@ import {
 } from "@/components/ui/table";
 
 export const metadata = buildMetadata({
-  title: "Retailer Platform - quote in-store, fulfil through any fabricator",
+  title: "Retailer Platform - quote in store, into any fabricator",
   description:
-    "For retail chains selling benchtops: store staff quote homeowners on the spot against partner fabricators' live catalogs and wholesale pricing, add your markup and branding, and route approved jobs to the right fabricator for fulfilment.",
+    "For retailers who sell benchtops: store staff quote customers on the spot against any fabricator on Nyro, add your margin, and send the approved job to the fabricator to make and deliver. White-label from quote to delivery: your logo and colours on everything the customer sees, and the fabricator never appears.",
   path: "/retailer",
 });
 
@@ -32,29 +43,81 @@ export const metadata = buildMetadata({
 const FLOW = [
   {
     step: "01",
-    title: "Pick the fabricator",
+    title: "Choose the fabricator",
     blurb:
-      "A homeowner walks in. Store staff pick the right partner fabricator for the job - by region, material or lead time - from the relationships you hold.",
+      "A customer walks in. Store staff pick the fabricator for the job from any fabricator on Nyro, by region, material or lead time.",
   },
   {
     step: "02",
-    title: "Quote against a live catalog",
+    title: "Quote on their catalog",
     blurb:
-      "The canvas loads that fabricator's catalog and prices live, at your agreed wholesale tier. If they update a price tomorrow, in-flight quotes re-price - nothing is synced, copied or stale.",
+      "That fabricator's catalog and your agreed trade price load into the quote. Prices are always current, so staff never quote off a stale price list.",
   },
   {
     step: "03",
     title: "Add your margin",
     blurb:
-      "Your markup goes on top. The homeowner sees one number, your branding and a quote they can approve online - never the wholesale cost behind it.",
+      "Your margin goes on top. The customer sees one price, your logo and colours, and a quote they can approve from their phone. The trade price behind it stays yours.",
   },
   {
     step: "04",
-    title: "Route the order",
+    title: "Send it to be made",
     blurb:
-      "On approval, a snapshot of the job - geometry, line items, agreed prices - crosses to the fabricator as an incoming order. From there they fulfil it like any other job, price locked.",
+      "On approval, the job goes to the fabricator as an order at the agreed price. They make it and deliver it, and the status comes back to your screen and your customer's.",
   },
 ] as const;
+
+const ROWS: FeatureRow[] = [
+  {
+    icon: Store,
+    title: "Quote in store,\nwith the customer",
+    lead: "Staff draw the benchtop and price it while the customer is still there.",
+    body: [
+      "The same drawing tools fabricators use, on a store screen. Staff choose the shape, the material, the edges and the sink and hob cutouts, and the price updates as they go. The customer leaves with a real quote, not a promise to call back.",
+    ],
+  },
+  {
+    icon: Percent,
+    title: "Your margin,\nyour rules",
+    lead: "Set a margin across the board or item by item.",
+    body: [
+      "Every fabricator on Nyro gives you a trade price. You decide what goes on top: one margin for everything, or a different one per material and product. Quotes keep the margin they were written with, so a change today never moves a price you've already given.",
+    ],
+  },
+  {
+    icon: Palette,
+    title: "White-label,\nquote to delivery",
+    lead: "The customer sees your brand at every step and never learns who made the top.",
+    body: [
+      "Upload your logo and set your colours once. The quote, the approval page, the emails, the order tracking page and the invoice all carry your name and your brand. Emails go out under your name, and messages from the customer come to you.",
+      "The fabricator is a supplier behind the scenes. Their name, their prices and their production detail never reach your customer: what comes back is placed, in production, dispatched, delivered, under your brand.",
+    ],
+  },
+  {
+    icon: Users,
+    title: "Your customers,\nmanaged by you",
+    lead: "Customer details stay with you, and approvals take one tap.",
+    body: [
+      "Your customers approve their quote, track their order and message you through a link you send them. No account, no password. The fabricator gets the delivery address they need to ship, and nothing more unless you choose to share it.",
+    ],
+  },
+  {
+    icon: Truck,
+    title: "Deliveries\nin view",
+    lead: "Know where every job is without ringing the factory.",
+    body: [
+      "Once a job is with the fabricator, its progress comes back to your screen: accepted, in production, dispatched, delivered. Your customer sees the same milestones under your brand.",
+    ],
+  },
+  {
+    icon: ChartBar,
+    title: "See the market\nyou're selling into",
+    lead: "What's selling, where, and which fabricators deliver.",
+    body: [
+      "Most popular materials, quote-to-order conversion by store, order volume by region, and how quickly each fabricator accepts and delivers. Manage supplier relationships and negotiate trade prices on evidence.",
+    ],
+  },
+];
 
 type Visibility = "yes" | "no" | "partial";
 const VISIBILITY_ROWS: {
@@ -63,39 +126,47 @@ const VISIBILITY_ROWS: {
   fabricator: Visibility;
   note?: string;
 }[] = [
-  { item: "Wholesale cost (retailer pays fabricator)", retailer: "yes", fabricator: "yes" },
-  { item: "Retailer's markup", retailer: "yes", fabricator: "no" },
-  { item: "Price the homeowner pays", retailer: "yes", fabricator: "no" },
+  { item: "Trade price (what you pay the fabricator)", retailer: "yes", fabricator: "yes" },
+  { item: "Your margin", retailer: "yes", fabricator: "no" },
+  { item: "Price the customer pays you", retailer: "yes", fabricator: "no" },
   {
-    item: "Homeowner's contact details",
+    item: "Your customer's contact details",
     retailer: "yes",
     fabricator: "partial",
-    note: "fulfilment details only",
+    note: "delivery address only",
   },
   {
     item: "Production progress",
     retailer: "partial",
     fabricator: "yes",
-    note: "status only - In Production, Ready",
+    note: "milestones only",
   },
 ];
 
 const FAQS: FaqItem[] = [
   {
-    q: "Do we have to hold or maintain the fabricators' catalogs?",
-    a: "No - that's the point. You never own a copy of a fabricator's catalog or pricing. Each relationship defines what you can see and the wholesale tier you pay, and the platform reads it live from the fabricator's own tenant.",
+    q: "Which fabricators can we quote into?",
+    a: "Any fabricator on Nyro. Each fabricator agrees a trade price with you and chooses which of their products you can sell. Quote against one fabricator for Auckland and another for Wellington, from the same screen.",
+  },
+  {
+    q: "Do we have to maintain the fabricators' catalogs or price lists?",
+    a: "No. Each fabricator's catalog and trade prices are kept current for you automatically. Your staff always quote off today's numbers, and there's no price list to update.",
   },
   {
     q: "Can fabricators see our margin?",
-    a: "No. The fabricator sees the wholesale price they agreed to charge you - which is what they invoice. Your markup and the homeowner's price are yours alone.",
+    a: "No. The fabricator sees the trade price they agreed with you, which is what they invoice. Your margin and the price your customer pays are yours alone.",
   },
   {
-    q: "What if a fabricator changes prices mid-quote?",
-    a: "Unapproved quotes re-price live, so store staff always quote on current numbers. The moment a homeowner approves, the price is locked in the order snapshot - future catalog changes can't touch it.",
+    q: "What if a fabricator changes their prices?",
+    a: "New quotes use the new price. A quote you've already given keeps the price it was written with, and once a customer approves, that price is locked on the order.",
   },
   {
-    q: "Which fabricators can we quote against?",
-    a: "Any fabricator on Nyro who agrees a relationship with you - the fabricator controls what's shared. The network is growing fabricator by fabricator; talk to us about the regions and partners you need covered.",
+    q: "Is the Retailer Platform white-label?",
+    a: "Yes, on everything your customer touches. Your logo and colours are on the quote, the approval page, the order tracking page, the invoice and every email, and emails are sent under your name. The fabricator making the top never appears to your customer. Pages are served from Nyro's secure domain rather than your own website, so the link your customer opens is a Nyro link carrying your brand.",
+  },
+  {
+    q: "Do our customers need an account?",
+    a: "No. They review, approve, track and message about their benchtop through a link you send them, with your branding on it. Your store staff have their own logins.",
   },
 ];
 
@@ -126,29 +197,29 @@ export default function RetailerPage() {
       <JsonLd data={faqPageSchema(faqItemsToSchema(FAQS))} />
 
       {/* Dark hero with the routing flow */}
-      <section className="surface-dark ink-grid relative overflow-hidden">
+      <section className="surface-dark ink-dots relative overflow-hidden">
         <Container className="relative pb-16 pt-16 md:pb-20 md:pt-20">
           <p className="label-mono text-[0.7rem] text-surface-dark-foreground/50">
             Retailer Platform · for retailers
           </p>
           <h1 className="display-hero mt-5 max-w-2xl text-balance text-surface-dark-foreground">
-            Quote the kitchen while the customer is still in the store
+            Quote the benchtop while the customer is still in the store
           </h1>
           <p
             data-speakable
             className="mt-5 max-w-xl text-base leading-relaxed text-surface-dark-foreground/65"
           >
-            For chains and merchants selling benchtops: one quoting surface
-            across every partner fabricator. Staff quote a homeowner on the
-            spot, your margin and branding go on top, and the approved job
-            routes to the right fabricator to make.
+            For retailers who sell benchtops. Your staff quote a customer on
+            the spot, into any fabricator on Nyro, with your margin on top and
+            your brand on everything the customer sees. The approved job goes
+            to the fabricator to make and deliver, and you watch it happen.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <BookCta variant="inverse" label="Talk to us" />
+            <BookCta variant="inverse" />
             <BookCta
               variant="ghost-dark"
-              label="How fabricators fit in"
-              href="/customer"
+              label="What's included"
+              href="#included"
             />
           </div>
 
@@ -176,6 +247,26 @@ export default function RetailerPage() {
         </Container>
       </section>
 
+      {/* What's included */}
+      <section id="included" className="surface-gray scroll-mt-16 border-t border-border">
+        <Container className="py-20 md:py-28">
+          <h2 className="display-md max-w-2xl text-balance">
+            Your store, your brand, every fabricator on Nyro behind it.
+          </h2>
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">
+            The Retailer Platform gives your stores one way to quote, sell and
+            track benchtops, whichever fabricator makes them.
+          </p>
+          <FeatureRows rows={ROWS} className="mt-16" />
+        </Container>
+      </section>
+
+      <SlimCta
+        title="Bring benchtops into the store visit."
+        sub="Tell us the regions you sell in and we'll show you quoting into the fabricators who cover them."
+        label="Book a demo"
+      />
+
       {/* Who sees what */}
       <section className="surface-gray border-t border-border">
         <Container className="py-20 md:py-28">
@@ -185,9 +276,9 @@ export default function RetailerPage() {
                 Both sides see exactly what they should.
               </h2>
               <p className="mt-5 max-w-md text-base leading-relaxed text-muted-foreground">
-                Commercial terms stay commercial. The platform enforces who
-                sees which number, so partnerships don&apos;t depend on
-                politeness.
+                Commercial terms stay commercial. Nyro decides who sees which
+                number, so the partnership doesn&apos;t depend on anyone being
+                polite.
               </p>
             </div>
             <Reveal className="lg:col-span-7">
@@ -196,7 +287,7 @@ export default function RetailerPage() {
                   <TableHeader>
                     <TableRow>
                       <TableHead className="min-w-56">What</TableHead>
-                      <TableHead>Retailer sees</TableHead>
+                      <TableHead>You see</TableHead>
                       <TableHead>Fabricator sees</TableHead>
                     </TableRow>
                   </TableHeader>
@@ -228,41 +319,18 @@ export default function RetailerPage() {
         </Container>
       </section>
 
-      <SlimCta
-        title="Bring benchtops into the store visit."
-        sub="The Retailer Platform rolls out with our fabricator network - talk to us about the regions you need covered."
-        label="Register interest"
-      />
-
-      {/* Analytics for category buyers */}
-      <section className="surface-gray border-t border-border">
-        <Container className="py-20 md:py-24">
-          <div className="mx-auto max-w-xl text-center">
-            <h2 className="display-md text-balance">
-              See the market you&apos;re selling into.
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-              Demand by region, material and style, quote-to-order conversion
-              by store and by fabricator - the analytics to manage fabricator
-              relationships and negotiate tiers on evidence instead of
-              anecdote.
-            </p>
-          </div>
-        </Container>
-      </section>
-
       {/* FAQ */}
       <Section surface="card">
         <Faq
           items={FAQS}
-          sub="What retail teams ask about quoting across a fabricator network."
+          sub="What retail teams ask about quoting into a network of fabricators."
         />
       </Section>
 
       <SlimCta
-        title="Map the partners to get you quoting."
-        sub="Tell us the regions and fabricators you need covered."
-        label="Talk to us"
+        title="See a store quote become a factory order."
+        sub="Thirty minutes: quote a customer, add your margin, send it to a fabricator, watch it come back."
+        label="Book a demo"
       />
     </>
   );

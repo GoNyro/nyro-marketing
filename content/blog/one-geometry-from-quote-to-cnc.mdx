@@ -1,6 +1,6 @@
 ---
 title: "Draw it once: why benchtop geometry should never be re-entered"
-description: "Every time a benchtop's shape is re-drawn between quote and CNC, the job absorbs risk. The fix is structural: one geometry record that travels the whole lifecycle."
+description: "Every time a benchtop's shape is re-drawn between the quote and the machine, the job absorbs risk. The fix is simple to say: one drawing that travels the whole way."
 date: "2026-08-02"
 author: "Nyro Team"
 tags: ["Production"]
@@ -31,32 +31,30 @@ Each hop is a chance for the shape to drift. Worse, when a revision lands
 mid-stream, it has to be applied *in every copy* - and the copies have no
 way of knowing they're stale.
 
-## What "one geometry" means in practice
+## What "one drawing" means in practice
 
-The alternative is structural, not procedural: the shape is captured once,
-as data - not as a picture of data - and every later stage reads the same
-record.
+The alternative is a change in how the job is held, not a new checklist:
+the shape is captured once, as a real drawing the software understands,
+and every later stage works from that same drawing.
 
 - **At quote time**, the drawing is the source of truth. Edges, cutouts,
-  thicknesses and finishes are attributes of the geometry, not notes beside
-  it.
-- **At approval**, the customer signs off the actual record - so what was
+  thicknesses and finishes are part of the drawing, not notes beside it.
+- **At approval**, the customer signs off that same drawing, so what was
   approved is what gets made, by definition.
-- **At production**, the DXF and CNC-ready files are *exports of* the
-  record, not re-drawings. If revision C moved the cutout, there is no
-  revision B left anywhere to cut from.
+- **At production**, the machine files are made *from* the drawing, not
+  re-drawn. If revision C moved the cutout, there is no revision B left
+  anywhere to cut from.
 
-This is the core architectural decision in Nyro: the quote canvas, the
-order and the CNC export all read one geometry record. It's why a quote a
-trade customer draws in the [Customer Portal](/customer) can land in a
-factory as a cuttable file, and why the
-[Fabrication Platform](/fabricator)'s floor tablets always show the current
-shape.
+This is how Nyro is built: the quote, the order and the machine program all
+come from one drawing. It's why a quote a customer draws in the
+[Customer Portal](/customer) can land in a factory as a cuttable file, and
+why the [Fabrication Platform](/fabricator)'s floor tablets always show the
+current shape.
 
 ## The payoff shows up in the remake bin
 
 Fewer remakes is the visible win, but the quiet one is bigger:
-**revisions get cheap.** When a change is one edit to one record, saying
+**revisions get cheap.** When a change is one edit to one drawing, saying
 "yes, we can move the sink" stops being an internal negotiation about who
 re-draws what. The customer gets flexibility; the factory keeps certainty.
 

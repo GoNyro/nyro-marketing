@@ -1,7 +1,7 @@
 import { BookCta } from "@/components/marketing/primitives/BookCta";
 import { Container } from "@/components/marketing/Container";
 import { AppWindow } from "@/components/marketing/mockups/AppWindow";
-import { CanvasScreen } from "@/components/marketing/mockups/CanvasScreen";
+import { CanvasDemo } from "@/components/marketing/mockups/CanvasDemo";
 import { TabStrip } from "@/components/marketing/sections/TabStrip";
 
 /* Attio/DOSS pattern: no illustration - the product screen IS the hero
@@ -9,7 +9,7 @@ import { TabStrip } from "@/components/marketing/sections/TabStrip";
    hydration. */
 export function HomeHero() {
   return (
-    <section className="surface-dark ink-grid relative overflow-hidden">
+    <section className="surface-dark ink-dots relative overflow-hidden">
       {/* soft vignette so the grid fades toward the edges */}
       <div
         aria-hidden
@@ -23,21 +23,22 @@ export function HomeHero() {
       <Container className="relative pt-16 md:pt-24">
         <div className="max-w-3xl">
           <h1 className="display-hero text-balance text-surface-dark-foreground">
-            Nyro is the operating system for benchtop fabrication
+            Quote, make and sell benchtops on one platform
           </h1>
           <p
             data-speakable
             className="mt-6 max-w-xl text-base leading-relaxed text-surface-dark-foreground/65"
           >
-            Your trade customers quote themselves against your catalog and your
-            prices. Orders arrive with CNC-ready geometry. The whole lifecycle
-            - quoting to dispatch - runs on one record.
+            Nyro gives fabricators a portal where customers quote themselves,
+            runs the factory from quote to delivery, and lets retailers quote
+            in store into any fabricator on the platform. Three products, one
+            place, and every job entered once.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <BookCta variant="inverse" />
             <BookCta
               variant="ghost-dark"
-              label="See the three products"
+              label="Which product is for you?"
               href="#products"
             />
           </div>
@@ -61,8 +62,8 @@ export function HomeHero() {
                 "radial-gradient(50% 60% at 50% 100%, oklch(0.58 0.11 132 / 0.16), transparent 70%)",
             }}
           />
-          <AppWindow className="relative">
-            <CanvasScreen />
+          <AppWindow className="relative" chrome="none">
+            <CanvasDemo />
           </AppWindow>
         </div>
       </Container>

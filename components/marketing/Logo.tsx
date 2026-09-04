@@ -1,60 +1,92 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/lib/site";
+import {
+  DIMENSION,
+  GLYPH_PATH,
+  WORDMARK,
+  WORDMARK_PATH,
+  WORDMARK_VIEWBOX,
+} from "@/lib/brand";
 
-/** The brand glyph: an L-shaped benchtop in plan view, drawn like a shop
-    drawing - solid olive slab with a hairline dimension tick. Shared visual
-    language with the quote canvas. */
+/** The brand glyph: a benchtop island in section, two waterfall returns to
+    the floor, reading as an "n". Used for the favicon and small marks. Fills
+    with currentColor; defaults to olive, override via className. */
 export function LogoGlyph({ className }: { className?: string }) {
   return (
     <svg
       viewBox="0 0 24 24"
-      className={className}
+      className={cn("text-brand-strong", className)}
       role="img"
       aria-hidden="true"
-      fill="none"
     >
-      {/* L-shaped slab */}
-      <path
-        d="M4 5.5 a1.5 1.5 0 0 1 1.5 -1.5 h8 a1.5 1.5 0 0 1 1.5 1.5 v6 a1 1 0 0 0 1 1 h2.5 a1.5 1.5 0 0 1 1.5 1.5 v4.5 a1.5 1.5 0 0 1 -1.5 1.5 h-13 a1.5 1.5 0 0 1 -1.5 -1.5 z"
-        fill="currentColor"
-        className="text-brand-strong"
-      />
-      {/* dimension line along the top edge */}
-      <path
-        d="M4 1.75 v2.5 M15 1.75 v2.5 M4 3 h11"
-        stroke="currentColor"
-        strokeWidth="1"
-        strokeLinecap="round"
-        className="text-foreground/40"
-      />
+      <path d={GLYPH_PATH} fill="currentColor" />
     </svg>
   );
 }
 
-/** "nyro" wordmark set in the display face. */
+/** The logo: "nyro" outlined from Archivo SemiBold, measured like the object
+    on a shop drawing. The letters scale with the SVG; the measurer keeps a
+    one-pixel hairline at every size so it stays crisp in the nav and quiet
+    in a hero. Size it with a height class (default h-6). */
 export function Wordmark({
   className,
   tone = "ink",
+  measured = true,
+  ticks = true,
 }: {
   className?: string;
   tone?: "ink" | "cream";
+  /** Draw the dimension line at all. */
+  measured?: boolean;
+  /** Draw the 45° end ticks. Turn off below ~40px tall: at nav scale the
+      tick is two pixels long and only smudges the corner where three
+      strokes meet; the extension lines terminate the dimension on their own. */
+  ticks?: boolean;
 }) {
+  const { width, xHeight } = WORDMARK;
+  const { y, gap, overshoot, tick } = DIMENSION;
+  const extTop = y - overshoot;
+  const extBottom = -xHeight - gap;
+
   return (
-    <span
+    <svg
+      viewBox={WORDMARK_VIEWBOX}
       className={cn(
-        "font-display leading-none",
+        "h-6 w-auto",
         tone === "cream" ? "text-surface-dark-foreground" : "text-foreground",
         className,
       )}
-      style={{ fontWeight: 600, letterSpacing: "-0.03em" }}
+      role="img"
+      aria-hidden="true"
     >
-      nyro
-    </span>
+      <path d={WORDMARK_PATH} fill="currentColor" />
+      {measured && (
+        <g stroke="currentColor" opacity="0.55" fill="none">
+          {/* extension lines and dimension line: snapped to the pixel grid so
+              the one-pixel hairline stays crisp instead of smearing across
+              two grey rows at nav size */}
+          <path
+            d={`M0 ${extBottom}V${extTop}M${width} ${extBottom}V${extTop}M0 ${y}H${width}`}
+            strokeWidth="1"
+            vectorEffect="non-scaling-stroke"
+            shapeRendering="crispEdges"
+          />
+          {/* oblique ticks, drawn heavier than the line as on a drawing */}
+          {ticks && (
+            <path
+              d={`M${-tick} ${y + tick}L${tick} ${y - tick}M${width - tick} ${y + tick}L${width + tick} ${y - tick}`}
+              strokeWidth="1.5"
+              vectorEffect="non-scaling-stroke"
+            />
+          )}
+        </g>
+      )}
+    </svg>
   );
 }
 
-/** Glyph + wordmark lockup. On dark surfaces pass tone="cream". */
+/** The measured wordmark at nav scale. On dark surfaces pass tone="cream". */
 export function Lockup({
   className,
   tone = "ink",
@@ -63,14 +95,8 @@ export function Lockup({
   tone?: "ink" | "cream";
 }) {
   return (
-    <span className={cn("inline-flex items-center gap-2", className)}>
-      <LogoGlyph
-        className={cn(
-          "size-6",
-          tone === "cream" && "[&_.text-brand-strong]:text-sage",
-        )}
-      />
-      <Wordmark tone={tone} className="text-[1.35rem]" />
+    <span className={cn("inline-flex items-center", className)}>
+      <Wordmark tone={tone} ticks={false} />
     </span>
   );
 }

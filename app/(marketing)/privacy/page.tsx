@@ -93,7 +93,7 @@ export default function PrivacyPage() {
             This notice covers the {siteConfig.name} marketing website at{" "}
             {siteConfig.url.replace("https://", "")}, operated by {legal.entity}
             , a New Zealand company. The Nyro platform itself (at
-            app.gonyro.com and tenant subdomains) is governed by each
+            app.gonyro.com and each customer&apos;s own address) is governed by each
             customer&apos;s subscription agreement - if you use Nyro through
             your employer or supplier, they control that data and this notice
             doesn&apos;t change it.

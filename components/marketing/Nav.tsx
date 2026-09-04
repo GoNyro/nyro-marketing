@@ -22,11 +22,11 @@ const plainLinkClass =
 const MENU_INTRO: Record<string, { label: string; title: string }> = {
   Products: {
     label: "The platform",
-    title: "Three products, one quoting engine",
+    title: "Three products. Pick where you start.",
   },
   Company: {
     label: "Company",
-    title: "Proven on a real factory floor",
+    title: "Built inside a working factory",
   },
 };
 

@@ -4,70 +4,174 @@ import { cn } from "@/lib/utils";
 
 /**
  * The dark product-story section: quiet menu on the left, one block per
- * product on the right, each with an isometric cube badge. The three
- * products presented as layers of one system.
+ * product on the right, each with an isometric slab mark. The three products
+ * are layers of one system, and the marks say so: the Customer Portal is one
+ * slab, the Fabrication Platform is that slab with the factory stacked on top,
+ * and the Retailer Platform is a slab hovering over a fabricator's stack that
+ * it routes jobs into.
  */
 
-function IsoCube({ label, className }: { label: string; className?: string }) {
-  const uid = label.toLowerCase().replace(/[^a-z]/g, "");
+type Mark = "single" | "stacked" | "routed";
+
+/** Isometric footprint shared by every slab: a 2:1 rhombus, 128 wide. */
+const HALF_W = 64;
+const HALF_H = 32;
+/** Slab thickness and the dark seam left between stacked slabs. */
+const SLAB_H = 16;
+const SEAM = 3;
+/** Air between a hovering slab and the stack beneath it. */
+const HOVER = 22;
+const CX = 88;
+/** Front vertex of the bottom slab; the ground shadow sits just under it. */
+const GROUND_Y = 170;
+
+type Tone = "hero" | "base";
+
+function slabTop(ty: number) {
+  return `M${CX} ${ty} L${CX + HALF_W} ${ty + HALF_H} L${CX} ${ty + 2 * HALF_H} L${CX - HALF_W} ${ty + HALF_H} Z`;
+}
+
+function Slab({ ty, tone, uid }: { ty: number; tone: Tone; uid: string }) {
+  const front = ty + 2 * HALF_H;
+  const side = ty + HALF_H;
   return (
-    <svg viewBox="0 0 176 176" className={cn("w-40", className)} aria-hidden>
-      <defs>
-        {/* light from upper-left: top face brightest, left mid, right dark */}
-        <linearGradient id={`${uid}-top`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="oklch(0.70 0.115 130)" />
-          <stop offset="1" stopColor="oklch(0.56 0.11 132)" />
-        </linearGradient>
-        <linearGradient id={`${uid}-left`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="oklch(0.46 0.095 132)" />
-          <stop offset="1" stopColor="oklch(0.36 0.075 132)" />
-        </linearGradient>
-        <linearGradient id={`${uid}-right`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="oklch(0.40 0.085 132)" />
-          <stop offset="1" stopColor="oklch(0.30 0.06 132)" />
-        </linearGradient>
-        <radialGradient id={`${uid}-shadow`} cx="0.5" cy="0.5" r="0.5">
-          <stop offset="0" stopColor="black" stopOpacity="0.5" />
-          <stop offset="1" stopColor="black" stopOpacity="0" />
-        </radialGradient>
-      </defs>
-
-      {/* ground shadow */}
-      <ellipse cx="88" cy="152" rx="66" ry="14" fill={`url(#${uid}-shadow)`} />
-
-      {/* faces */}
-      <path d="M88 24 L152 56 L88 88 L24 56 Z" fill={`url(#${uid}-top)`} />
-      <path d="M24 56 L88 88 L88 144 L24 112 Z" fill={`url(#${uid}-left)`} />
-      <path d="M152 56 L88 88 L88 144 L152 112 Z" fill={`url(#${uid}-right)`} />
-
-      {/* crisp lit edges */}
+    <g>
       <path
-        d="M24 56 L88 24 L152 56"
+        d={`M${CX - HALF_W} ${side} L${CX} ${front} L${CX} ${front + SLAB_H} L${CX - HALF_W} ${side + SLAB_H} Z`}
+        fill={`url(#${uid}-${tone}-left)`}
+      />
+      <path
+        d={`M${CX + HALF_W} ${side} L${CX} ${front} L${CX} ${front + SLAB_H} L${CX + HALF_W} ${side + SLAB_H} Z`}
+        fill={`url(#${uid}-${tone}-right)`}
+      />
+      <path d={slabTop(ty)} fill={`url(#${uid}-${tone}-top)`} />
+      {/* front vertical seam, darkest line on the object */}
+      <path
+        d={`M${CX} ${front} L${CX} ${front + SLAB_H}`}
+        stroke="oklch(0.16 0.015 140 / 0.7)"
+        strokeWidth="0.75"
+      />
+      {/* lit rim along the two edges facing the light */}
+      <path
+        d={`M${CX - HALF_W} ${side} L${CX} ${ty} L${CX + HALF_W} ${side}`}
         fill="none"
-        stroke="oklch(0.85 0.07 130 / 0.6)"
+        stroke={
+          tone === "hero"
+            ? "oklch(0.9 0.06 130 / 0.6)"
+            : "oklch(0.8 0.05 130 / 0.28)"
+        }
         strokeWidth="1"
         strokeLinejoin="round"
       />
-      <path
-        d="M24 56 L88 88 L152 56 M88 88 L88 144"
-        fill="none"
-        stroke="oklch(0.2 0.02 140 / 0.5)"
-        strokeWidth="0.75"
+    </g>
+  );
+}
+
+/**
+ * One SVG per mark. Every variant shares the same ground line so the three
+ * marks sit at the same height on the page; the viewBox is trimmed to the
+ * mark's own extent so a single slab doesn't carry empty air above it.
+ */
+function IsoMark({ mark, className }: { mark: Mark; className?: string }) {
+  const uid = `mark-${mark}`;
+  const bottomTy = GROUND_Y - 2 * HALF_H - SLAB_H;
+  const step = SLAB_H + SEAM;
+
+  // Slabs from the ground up. `hero` is the product itself; `base` is the
+  // layer it inherits or routes into, pushed back in tone.
+  const slabs: { ty: number; tone: Tone }[] =
+    mark === "single"
+      ? [{ ty: bottomTy, tone: "hero" }]
+      : mark === "stacked"
+        ? [
+            { ty: bottomTy, tone: "base" },
+            { ty: bottomTy - step, tone: "hero" },
+          ]
+        : [
+            { ty: bottomTy, tone: "base" },
+            { ty: bottomTy - step, tone: "base" },
+            { ty: bottomTy - 2 * step - HOVER, tone: "hero" },
+          ];
+
+  const topTy = slabs[slabs.length - 1].ty;
+  const minY = topTy - 8;
+  const maxY = GROUND_Y + 20;
+  const hoverBase = mark === "routed" ? slabs[1].ty : null;
+
+  return (
+    <svg
+      viewBox={`0 ${minY} 176 ${maxY - minY}`}
+      className={cn("w-44", className)}
+      aria-hidden
+    >
+      <defs>
+        {/* light from upper-left: top face brightest, left mid, right dark */}
+        <linearGradient id={`${uid}-hero-top`} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="oklch(0.74 0.12 130)" />
+          <stop offset="1" stopColor="oklch(0.58 0.11 132)" />
+        </linearGradient>
+        <linearGradient id={`${uid}-hero-left`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="oklch(0.48 0.095 132)" />
+          <stop offset="1" stopColor="oklch(0.41 0.085 132)" />
+        </linearGradient>
+        <linearGradient id={`${uid}-hero-right`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="oklch(0.39 0.08 132)" />
+          <stop offset="1" stopColor="oklch(0.32 0.065 132)" />
+        </linearGradient>
+        <linearGradient id={`${uid}-base-top`} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="oklch(0.5 0.07 132)" />
+          <stop offset="1" stopColor="oklch(0.41 0.06 132)" />
+        </linearGradient>
+        <linearGradient id={`${uid}-base-left`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="oklch(0.35 0.055 132)" />
+          <stop offset="1" stopColor="oklch(0.3 0.045 132)" />
+        </linearGradient>
+        <linearGradient id={`${uid}-base-right`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="oklch(0.29 0.045 132)" />
+          <stop offset="1" stopColor="oklch(0.24 0.035 132)" />
+        </linearGradient>
+        <filter id={`${uid}-blur`} x="-30%" y="-80%" width="160%" height="260%">
+          <feGaussianBlur stdDeviation="4" />
+        </filter>
+        {hoverBase !== null && (
+          <clipPath id={`${uid}-hover-clip`}>
+            <path d={slabTop(hoverBase)} />
+          </clipPath>
+        )}
+      </defs>
+
+      {/* contact shadow: tight, blurred, sits under the front edge */}
+      <ellipse
+        cx={CX}
+        cy={GROUND_Y + 6}
+        rx={60}
+        ry={9}
+        fill="black"
+        fillOpacity="0.45"
+        filter={`url(#${uid}-blur)`}
       />
 
-      <text
-        x={88}
-        y={122}
-        textAnchor="middle"
-        style={{
-          fontFamily: "var(--font-plex-mono)",
-          fontSize: "9px",
-          letterSpacing: "0.16em",
-        }}
-        fill="oklch(0.97 0.005 95 / 0.85)"
-      >
-        {label}
-      </text>
+      {slabs.slice(0, hoverBase !== null ? 2 : slabs.length).map((slab) => (
+        <Slab key={slab.ty} ty={slab.ty} tone={slab.tone} uid={uid} />
+      ))}
+
+      {/* the hovering slab casts onto the stack's top face beneath it */}
+      {hoverBase !== null && (
+        <>
+          <g clipPath={`url(#${uid}-hover-clip)`}>
+            <ellipse
+              cx={CX}
+              cy={hoverBase + HALF_H + 4}
+              rx={52}
+              ry={22}
+              fill="black"
+              fillOpacity="0.4"
+              filter={`url(#${uid}-blur)`}
+            />
+          </g>
+          <Slab ty={slabs[2].ty} tone="hero" uid={uid} />
+        </>
+      )}
     </svg>
   );
 }
@@ -75,7 +179,9 @@ function IsoCube({ label, className }: { label: string; className?: string }) {
 type Product = {
   id: string;
   menu: string;
+  mark: Mark;
   cube: string;
+  who: string;
   title: string;
   body: string;
   points: string[];
@@ -87,13 +193,16 @@ const PRODUCTS: Product[] = [
   {
     id: "customer-portal",
     menu: "Customer Portal",
+    mark: "single",
     cube: "QUOTE",
-    title: "Give your customers the counter",
-    body: "The self-serve quoting surface a fabricator hands to its trade accounts. Customers draw against the catalog you share, at the tier you set, and orders arrive with CNC-ready geometry attached.",
+    who: "For fabricators who want quoting off their desk",
+    title: "Your customers quote themselves",
+    body: "Give the kitchen companies, joiners and builders who buy from you a portal of their own. They draw the benchtop, see your price for their account, and send it in. You set the catalog, the pricing, what each customer is allowed to draw, and how delivery is charged. Approved jobs hand over to whatever you use to run production.",
     points: [
-      "Catalog scoped per account",
-      "Live pricing from your rules",
-      "Approvals, magic links, DXF / CNC export",
+      "Your catalog and your prices, set per customer",
+      "You decide what each customer can draw",
+      "Approvals, order tracking and delivery built in",
+      "Connects to the production system you already run",
     ],
     href: "/customer",
     linkLabel: "Explore Customer Portal",
@@ -101,13 +210,16 @@ const PRODUCTS: Product[] = [
   {
     id: "fabrication-platform",
     menu: "Fabrication Platform",
+    mark: "stacked",
     cube: "FABRICATE",
-    title: "Run the factory on the same record",
-    body: "The full operating system: staff quoting, production queue, floor tablets, stock, dispatch, financials and analytics. The quote's geometry is the piece the floor cuts - nothing re-entered.",
+    who: "For fabricators who want the whole job in one place",
+    title: "Run the factory on Nyro",
+    body: "Everything in the Customer Portal, plus the factory itself. Staff quote on the same drawing tools, orders go straight into the production queue, your CNC machines cut from the approved drawing, floor staff work from tablets, and stock, delivery and invoicing all live on the same job.",
     points: [
-      "Everything in Customer Portal",
-      "Scheduling, floor tablets, stock, dispatch",
-      "Upgrade is a module switch, not a migration",
+      "Everything in the Customer Portal",
+      "Production queue, machine programs, floor tablets",
+      "Stock, delivery runs and invoicing on the same job",
+      "Switch on from the Customer Portal with nothing to move",
     ],
     href: "/fabricator",
     linkLabel: "Explore Fabrication Platform",
@@ -115,13 +227,16 @@ const PRODUCTS: Product[] = [
   {
     id: "retailer-platform",
     menu: "Retailer Platform",
+    mark: "routed",
     cube: "RETAIL",
-    title: "Open the retail channel",
-    body: "Store staff quote homeowners against partner fabricators' live catalogs at agreed wholesale tiers, add the retailer's markup and branding, and route approved jobs out for fulfilment.",
+    who: "For retailers who sell benchtops in store",
+    title: "Quote in store, into any fabricator",
+    body: "Your store staff quote a customer on the spot, against the catalog and trade prices of any fabricator on Nyro. Your margin goes on top, your logo and colours go on everything the customer sees, and the approved job routes to the fabricator to make and deliver.",
     points: [
-      "Live catalogs, never copies",
-      "Your markup, your branding",
-      "Approved quotes route as orders",
+      "Any fabricator on Nyro, at your agreed trade price",
+      "Your margin, your logo, your colours",
+      "Your customers approve and track with a link, no login",
+      "Deliveries and order status in one view",
     ],
     href: "/retailer",
     linkLabel: "Explore Retailer Platform",
@@ -130,15 +245,15 @@ const PRODUCTS: Product[] = [
 
 export function ProductStack() {
   return (
-    <section className="surface-dark ink-grid relative overflow-hidden">
+    <section className="surface-dark ink-dots relative overflow-hidden">
       <Container className="py-20 md:py-28">
         <h2 className="display-md mx-auto max-w-xl text-center text-surface-dark-foreground">
-          One platform, sold three ways.
+          Three products. Pick where you start.
         </h2>
         <p className="mx-auto mt-4 max-w-md text-center text-sm leading-relaxed text-surface-dark-foreground/55">
-          The canvas, the pricing engine and the catalog are shared
-          infrastructure. Each product is a different surface on the same core,
-          for a different side of the industry.
+          Two for fabricators, one for retailers. They share the same drawing
+          tools, the same pricing and the same job record, so a quote drawn in
+          a store can be cut in a factory without anyone typing it in again.
         </p>
 
         <div className="mt-16 grid gap-10 lg:grid-cols-12 lg:gap-16">
@@ -166,8 +281,11 @@ export function ProductStack() {
                 id={product.id}
                 className="grid scroll-mt-28 items-center gap-8 md:grid-cols-12"
               >
-                <div className="flex justify-center md:col-span-4">
-                  <IsoCube label={product.cube} />
+                <div className="flex flex-col items-center gap-4 md:col-span-4">
+                  <IsoMark mark={product.mark} />
+                  <p className="label-mono text-[0.65rem] text-surface-dark-foreground/40">
+                    {product.cube}
+                  </p>
                 </div>
                 <div className="md:col-span-8">
                   <p className="label-mono text-[0.65rem] text-surface-dark-foreground/45">
@@ -176,6 +294,9 @@ export function ProductStack() {
                   <h3 className="mt-2 font-display text-2xl text-surface-dark-foreground">
                     {product.title}
                   </h3>
+                  <p className="mt-1.5 text-sm font-medium text-brand-bright/90">
+                    {product.who}
+                  </p>
                   <p className="mt-3 max-w-lg text-sm leading-relaxed text-surface-dark-foreground/60">
                     {product.body}
                   </p>

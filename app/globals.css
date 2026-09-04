@@ -8,8 +8,8 @@
   /* DOSS-register palette, Engage-tinted: near-black ink sections carry the
      brand story; light sections are warm gray, not white; white is reserved
      for app-UI mockups and cards. One accent (olive), used sparingly. */
-  --background: oklch(0.955 0.004 95);         /* warm paper */
-  --foreground: oklch(0.22 0.012 145);         /* green-cast ink */
+  --background: oklch(0.955 0.004 95); /* warm paper */
+  --foreground: oklch(0.22 0.012 145); /* green-cast ink */
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.22 0.012 145);
   --popover: oklch(1 0 0);
@@ -26,14 +26,14 @@
   /* Decorative only - wireframe fills, small marks. Never carries text. */
   --brand: oklch(0.58 0.11 132);
   --brand-soft: oklch(0.93 0.02 130);
-  --brand-strong: oklch(0.45 0.09 132);        /* accessible on paper */
+  --brand-strong: oklch(0.45 0.09 132); /* accessible on paper */
   /* Accent for text/links on dark ink. */
   --brand-bright: oklch(0.78 0.12 132);
 
   /* Buttons are monochrome: ink pill on light, white pill on dark. */
   --primary: oklch(0.22 0.012 145);
   --primary-foreground: oklch(0.985 0.002 95);
-  --accent: oklch(0.45 0.09 132);              /* links, rare emphasis */
+  --accent: oklch(0.45 0.09 132); /* links, rare emphasis */
   --accent-foreground: oklch(0.99 0 0);
 
   --secondary: oklch(0.93 0.005 95);
@@ -210,10 +210,18 @@
     line-height: 1.08;
     letter-spacing: -0.03em;
   }
-  .display-xl { @apply font-display text-5xl sm:text-6xl md:text-7xl; }
-  .display-lg { @apply font-display text-4xl sm:text-5xl md:text-6xl; }
-  .display-md { @apply font-display text-3xl sm:text-4xl md:text-[2.75rem]; }
-  .display-sm { @apply font-display text-2xl sm:text-3xl; }
+  .display-xl {
+    @apply font-display text-5xl sm:text-6xl md:text-7xl;
+  }
+  .display-lg {
+    @apply font-display text-4xl sm:text-5xl md:text-6xl;
+  }
+  .display-md {
+    @apply font-display text-3xl sm:text-4xl md:text-[2.75rem];
+  }
+  .display-sm {
+    @apply font-display text-2xl sm:text-3xl;
+  }
 
   /* Small technical label - used sparingly (tab strips, mockup chrome,
      wireframe annotations), muted by default. */
@@ -226,29 +234,97 @@
   /* Fine graph grid for light insets (drawing panels). */
   .blueprint-grid {
     background-image:
-      linear-gradient(to right, oklch(0.22 0.012 145 / 0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, oklch(0.22 0.012 145 / 0.05) 1px, transparent 1px);
+      linear-gradient(
+        to right,
+        oklch(0.22 0.012 145 / 0.05) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        oklch(0.22 0.012 145 / 0.05) 1px,
+        transparent 1px
+      );
     background-size: 48px 48px;
   }
-  /* Dark ink ground with a faint diagonal survey grid - the hero/product
-     sections' atmosphere. Two crossing diagonal line families, very low
-     contrast, plus a soft vignette handled by the section itself. */
-  .ink-grid {
+  /* The builder's dot grid: white paper, a faint dot every 28px. */
+  .dot-grid {
+    background-color: var(--card);
+    background-image: radial-gradient(#d0d2dc 1.25px, transparent 1.6px);
+    background-size: 28px 28px;
+    background-position: 14px 14px;
+  }
+  /* The product's own palette (engage-online-ui app.css), scoped to the app
+     mockups so they set in the product's blue-violet ink rather than the
+     site's green-cast ink. Theme tokens are inlined, so overriding the
+     source variables here re-colours every utility inside. */
+  .product-ink {
+    --foreground: #131129;
+    --card: #ffffff;
+    --card-foreground: #131129;
+    --muted-foreground: #555670;
+    --stage: #f4f5f8;
+    --border: #ececf2;
+  }
+  /* Dark ink ground with a faint drafting grid - the hero/product sections'
+     atmosphere. Option 3: orthogonal shop-drawing grid (major lines with a
+     fainter sub-grid) painted on a pseudo-element and masked so it is
+     strongest around the headline and dissolves toward the product screen.
+     The section adds its own vignette above it. Sections carry `relative`. */
+  .ink-grid::before,
+  .ink-dots::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    -webkit-mask-image: radial-gradient(
+      120% 90% at 50% 0%,
+      black 20%,
+      transparent 100%
+    );
+    mask-image: radial-gradient(
+      120% 90% at 50% 0%,
+      black 20%,
+      transparent 100%
+    );
+  }
+  .ink-grid::before {
     background-image:
-      repeating-linear-gradient(
-        63deg,
-        oklch(0.955 0.004 95 / 0.045) 0,
-        oklch(0.955 0.004 95 / 0.045) 1px,
-        transparent 1px,
-        transparent 110px
+      linear-gradient(
+        to right,
+        oklch(0.955 0.004 95 / 0.07) 1px,
+        transparent 1px
       ),
-      repeating-linear-gradient(
-        -63deg,
-        oklch(0.955 0.004 95 / 0.045) 0,
-        oklch(0.955 0.004 95 / 0.045) 1px,
-        transparent 1px,
-        transparent 110px
+      linear-gradient(
+        to bottom,
+        oklch(0.955 0.004 95 / 0.07) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to right,
+        oklch(0.955 0.004 95 / 0.025) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        oklch(0.955 0.004 95 / 0.025) 1px,
+        transparent 1px
       );
+    background-size:
+      128px 128px,
+      128px 128px,
+      32px 32px,
+      32px 32px;
+  }
+
+  /* Option 2 for comparison: a fine dot grid with the same mask. Swap
+     `ink-grid` for `ink-dots` on a section to see it. */
+  .ink-dots::before {
+    background-image: radial-gradient(
+      oklch(0.955 0.004 95 / 0.16) 1px,
+      transparent 1.3px
+    );
+    background-size: 28px 28px;
+    background-position: 14px 14px;
   }
 
   .dim-dash {

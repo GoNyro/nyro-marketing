@@ -1,19 +1,54 @@
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/marketing/Container";
 import { cn } from "@/lib/utils";
 
 /**
  * The six-station strip under the hero: bold verb, muted object, top rule.
- * Reads as the platform's table of contents.
+ * Reads as the platform's table of contents - the life of a benchtop, in
+ * the order it happens. Each station names the product that owns it, so
+ * the reader knows where the link goes before clicking (three stations
+ * belong to the Customer Portal, two to the Fabrication Platform, one to
+ * the Retailer Platform).
  */
 
 const STATIONS = [
-  { verb: "Quote", rest: "drawn by the customer", href: "/customer" },
-  { verb: "Price", rest: "live, from your rules", href: "/customer" },
-  { verb: "Approve", rest: "with one link", href: "/customer" },
-  { verb: "Export", rest: "DXF & CNC-ready", href: "/customer" },
-  { verb: "Produce", rest: "on the factory floor", href: "/fabricator" },
-  { verb: "Analyze", rest: "margin & lead time", href: "/fabricator" },
+  {
+    verb: "Quote",
+    rest: "drawn by the customer",
+    product: "Customer Portal",
+    href: "/customer",
+  },
+  {
+    verb: "Price",
+    rest: "as they draw, from your rules",
+    product: "Customer Portal",
+    href: "/customer",
+  },
+  {
+    verb: "Approve",
+    rest: "with one link, no login",
+    product: "Customer Portal",
+    href: "/customer",
+  },
+  {
+    verb: "Make",
+    rest: "on your machines",
+    product: "Fabrication Platform",
+    href: "/fabricator",
+  },
+  {
+    verb: "Deliver",
+    rest: "zones, runs, proof",
+    product: "Fabrication Platform",
+    href: "/fabricator",
+  },
+  {
+    verb: "Sell",
+    rest: "in store, through retailers",
+    product: "Retailer Platform",
+    href: "/retailer",
+  },
 ] as const;
 
 export function TabStrip({ className }: { className?: string }) {
@@ -24,13 +59,21 @@ export function TabStrip({ className }: { className?: string }) {
           <li key={station.verb}>
             <Link
               href={station.href}
-              className="group block border-t border-surface-dark-foreground/25 pt-3 transition-colors hover:border-surface-dark-foreground/60"
+              aria-label={`${station.verb}: ${station.rest}. ${station.product}`}
+              className="group flex h-full flex-col border-t border-surface-dark-foreground/25 pt-3 transition-colors hover:border-surface-dark-foreground/60"
             >
-              <span className="block text-sm font-medium text-surface-dark-foreground">
+              <span className="flex items-center justify-between text-sm font-medium text-surface-dark-foreground">
                 {station.verb}
+                <ArrowUpRight
+                  aria-hidden
+                  className="size-3.5 text-surface-dark-foreground/35 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-brand-bright"
+                />
               </span>
               <span className="mt-0.5 block text-sm text-surface-dark-foreground/50 transition-colors group-hover:text-surface-dark-foreground/70">
                 {station.rest}
+              </span>
+              <span className="label-mono mt-auto pt-3 text-[0.6rem] text-surface-dark-foreground/35 transition-colors group-hover:text-brand-bright">
+                {station.product}
               </span>
             </Link>
           </li>

@@ -11,15 +11,16 @@ import { siteConfig } from "@/lib/site";
 export const metadata = buildMetadata({
   title: "Book a demo",
   description:
-    "Book a 30-minute Nyro walkthrough. We'll load a sample catalog with your materials and pricing and show you the portal exactly as your trade customers would see it.",
+    "Book a 30-minute Nyro walkthrough. We load a sample catalog with your materials and prices and show you the platform the way your customers, your staff or your stores would use it.",
   path: "/contact",
 });
 
 const EXPECT: string[] = [
   "We set up a sample catalog with a few of your real materials, edges and machining rates.",
-  "You draw a benchtop on the quote canvas and watch it price at a customer tier you define.",
-  "We walk the job through approval, order and DXF/CNC export - the full loop.",
-  "You leave knowing what rollout looks like for your first two or three trade accounts.",
+  "You draw a benchtop and watch it price itself at a customer price level you set.",
+  "We walk the job through approval, order and out to production, the full loop.",
+  "Retailers: we quote a customer in store, add your margin and send the job to a fabricator.",
+  "You leave knowing what rollout looks like for your first few accounts or stores.",
 ];
 
 export default function ContactPage() {
@@ -39,15 +40,15 @@ export default function ContactPage() {
         <Container className="relative pb-12 pt-16 md:pb-16 md:pt-24">
           <Eyebrow>Contact</Eyebrow>
           <h1 className="display-hero mt-5 max-w-3xl text-balance">
-            Book a demo - and draw a benchtop that prices itself.
+            Book a demo, and draw a benchtop that prices itself.
           </h1>
           <p
             className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground"
             data-speakable
           >
-            Spend 30 minutes with us. We&apos;ll set up a sample catalog on
-            your materials, quote a job the way your customers would, and walk
-            through what rollout looks like - no prep required.
+            Spend 30 minutes with us. We set up a sample catalog on your
+            materials, quote a job the way your customers or your store staff
+            would, and walk through what rollout looks like. No prep required.
           </p>
           <div className="mt-8">
             <BookCta label="Email us to book" href={emailHref} withArrow />
@@ -85,9 +86,9 @@ export default function ContactPage() {
               Reach us
             </p>
             <p className="mt-4 text-lg leading-relaxed text-foreground">
-              Tell us who you are, roughly how many quotes a week you handle,
-              and the materials you work with. We&apos;ll come back with demo
-              times.
+              Tell us whether you make benchtops or sell them, roughly how
+              many quotes a week you handle, and the materials you work with.
+              We&apos;ll come back with demo times.
             </p>
             <div className="mt-8 flex flex-col gap-4 border-t border-border pt-6">
               <p className="flex items-center gap-2.5 text-sm text-muted-foreground">
@@ -114,8 +115,8 @@ export default function ContactPage() {
       <Section surface="cream">
         <div className="mx-auto flex max-w-2xl flex-col items-center gap-4 text-center">
           <p className="text-balance text-xl font-medium leading-relaxed text-foreground sm:text-2xl">
-            No hard sell - just your catalog, your pricing, and a quote that
-            draws itself in front of you.
+            No hard sell. Just your catalog, your prices, and a quote that
+            prices itself in front of you.
           </p>
           <p className="label-mono text-[0.65rem] text-muted-foreground">
             Customer Portal · Fabrication Platform · Retailer Platform

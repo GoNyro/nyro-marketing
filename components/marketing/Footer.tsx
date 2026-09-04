@@ -19,9 +19,10 @@ export function Footer() {
               <Lockup tone="cream" />
             </Link>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-surface-dark-foreground/60">
-              The quoting and order platform for benchtop fabricators. Your
-              customers draw the job, Nyro prices it live, and the order
-              flows through to the factory floor.
+              The platform for quoting, making and selling benchtops. Your
+              customers draw the job, Nyro prices it as they draw, and the
+              order carries straight through to the factory and the delivery
+              truck.
             </p>
           </div>
 
